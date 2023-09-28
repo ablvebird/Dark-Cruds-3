@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <!--Simple-->
+    <xsd:element name="bossName" type="xsd:string"/>
+    <xsd:element name="location" type="xsd:string"/>
+    <xsd:element name="HP" type="xsd:integer"/>
+    <xsd:element name="Poise" type="xsd:decimal"/>
+    <xsd:element name="Souls" type="xsd:integer"/>
+    <xsd:element name="dropName" type="xsd:string"/>
+    <xsd:element name="description" type="xsd:string"/>
+
+    <!--Complex-->
+    <xsd:element name="stats">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="HP"/>
+                <xsd:element ref="Poise"/>
+                <xsd:element ref="Souls"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="drop">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="dropName"/>
+                <xsd:element ref="description"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="boss">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="bossName"/>
+                <xsd:element ref="location"/>
+                <xsd:element ref="stats"/>
+                <xsd:element ref="drops"/>
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:integer" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <!--Attributes-->
+
+    <!--Root-->
+    <xsd:element name="bosses">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="boss" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="xmlns:xsi" type="xsd:string"/>
+            <xsd:attribute name="xsi:noNamespaceSchemaLocation" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>

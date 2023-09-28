@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bosses xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="bosses.xsd">
+    <boss id="1">
+        <bossName>Iudex Gundyr</bossName>
+        <location>Cemetery of Ash</location>
+        <stats>
+            <HP>1037</HP>
+            <Poise>185.00</Poise>
+            <Souls>3000</Souls>
+        </stats>
+        <drops>
+            <drop>
+                <name>Coiled Sword</name>
+                <description>
+                    Sword missing from the shrine bonfire.
+                    Cannot be equipped as a weapon.
+
+                    Thrust into the shrine bonfire to restore its power and enable travel between bonfires.
+
+                    This sword is only bequeathed to chosen ash, as judged by the Iudex, who awaits the arrival of ash as a scabbard.
+                </description>
+            </drop>
+        </drops>
+</bosses>
