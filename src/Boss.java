@@ -13,9 +13,7 @@ public class Boss {
     public int getBossID() {
         return bossID;
     }
-    public void setBossID(int bossID) {
-        this.bossID = bossID;
-    }
+    public void setBossID(int bossID) { this.bossID = bossID; }
 
     // Getter and Setter for bossName
     public String getBossName() {
@@ -64,4 +62,5 @@ public class Boss {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }
