@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bosses xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="bosses.xsd">
-    <boss id="1">
+    <boss bossID="1">
         <bossName>Iudex Gundyr</bossName>
         <location>Cemetery of Ash</location>
         <stats>
@@ -10,7 +10,7 @@
         </stats>
         <drops>
             <drop>
-                <name>Coiled Sword</name>
+                <dropName>Coiled Sword</dropName>
                 <description>
                     Sword missing from the shrine bonfire.
                     Cannot be equipped as a weapon.
@@ -21,4 +21,5 @@
                 </description>
             </drop>
         </drops>
+    </boss>
 </bosses>
