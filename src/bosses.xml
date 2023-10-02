@@ -1,8 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bosses xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="bosses.xsd">
+
+    <!--Gundyr-->
     <boss bossID="1">
         <bossName>Iudex Gundyr</bossName>
         <location>Cemetery of Ash</location>
+        <stats>
+            <HP>1037</HP>
+            <Poise>185.00</Poise>
+            <Souls>3000</Souls>
+        </stats>
+        <drops>
+            <drop>
+                <dropName>Coiled Sword</dropName>
+                <description>
+                    Sword missing from the shrine bonfire.
+                    Cannot be equipped as a weapon.
+
+                    Thrust into the shrine bonfire to restore its power and enable travel between bonfires.
+
+                    This sword is only bequeathed to chosen ash, as judged by the Iudex, who awaits the arrival of ash as a scabbard.
+                </description>
+            </drop>
+        </drops>
+    </boss>
+
+    <!--Vordt-->
+    <boss bossID="2">
+        <bossName>Vordt of the Boreal Valley</bossName>
+        <location>High Wall of Lothric</location>
+        <stats>
+            <HP>1037</HP>
+            <Poise>185.00</Poise>
+            <Souls>3000</Souls>
+        </stats>
+        <drops>
+            <drop>
+                <dropName>Coiled Sword</dropName>
+                <description>
+                    Sword missing from the shrine bonfire.
+                    Cannot be equipped as a weapon.
+
+                    Thrust into the shrine bonfire to restore its power and enable travel between bonfires.
+
+                    This sword is only bequeathed to chosen ash, as judged by the Iudex, who awaits the arrival of ash as a scabbard.
+                </description>
+            </drop>
+        </drops>
+    </boss>
+
+    <!--Greatwood-->
+    <boss bossID="3">
+        <bossName>Curse-rotted Greatwood</bossName>
+        <location>Undead Settlement</location>
+        <stats>
+            <HP>1037</HP>
+            <Poise>185.00</Poise>
+            <Souls>3000</Souls>
+        </stats>
+        <drops>
+            <drop>
+                <dropName>Coiled Sword</dropName>
+                <description>
+                    Sword missing from the shrine bonfire.
+                    Cannot be equipped as a weapon.
+
+                    Thrust into the shrine bonfire to restore its power and enable travel between bonfires.
+
+                    This sword is only bequeathed to chosen ash, as judged by the Iudex, who awaits the arrival of ash as a scabbard.
+                </description>
+            </drop>
+        </drops>
+    </boss>
+
+    <!--Wolnir-->
+    <boss bossID="4">
+        <bossName>High Lord Wolnir</bossName>
+        <location>Carthus Catacombs</location>
+        <stats>
+            <HP>1037</HP>
+            <Poise>185.00</Poise>
+            <Souls>3000</Souls>
+        </stats>
+        <drops>
+            <drop>
+                <dropName>Coiled Sword</dropName>
+                <description>
+                    Sword missing from the shrine bonfire.
+                    Cannot be equipped as a weapon.
+
+                    Thrust into the shrine bonfire to restore its power and enable travel between bonfires.
+
+                    This sword is only bequeathed to chosen ash, as judged by the Iudex, who awaits the arrival of ash as a scabbard.
+                </description>
+            </drop>
+        </drops>
+    </boss>
+
+    <!--Yhorm-->
+    <boss bossID="5">
+        <bossName>Yhorm the Giant</bossName>
+        <location>The Profaned Capital</location>
+        <stats>
+            <HP>1037</HP>
+            <Poise>185.00</Poise>
+            <Souls>3000</Souls>
+        </stats>
+        <drops>
+            <drop>
+                <dropName>Coiled Sword</dropName>
+                <description>
+                    Sword missing from the shrine bonfire.
+                    Cannot be equipped as a weapon.
+
+                    Thrust into the shrine bonfire to restore its power and enable travel between bonfires.
+
+                    This sword is only bequeathed to chosen ash, as judged by the Iudex, who awaits the arrival of ash as a scabbard.
+                </description>
+            </drop>
+        </drops>
+    </boss>
+
+    <!--Midir-->
+    <boss bossID="6">
+        <bossName>Dark-Eater Midir</bossName>
+        <location>The Ringed City</location>
         <stats>
             <HP>1037</HP>
             <Poise>185.00</Poise>
