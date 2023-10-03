@@ -21,14 +21,6 @@
         </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="drops">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="drop" minOccurs="1" maxOccurs="unbounded"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-
     <xsd:element name="drop">
         <xsd:complexType>
             <xsd:sequence>
@@ -44,14 +36,14 @@
                 <xsd:element ref="bossName"/>
                 <xsd:element ref="location"/>
                 <xsd:element ref="stats"/>
-                <xsd:element ref="drops"/>
+                <xsd:element ref="drop"/>
             </xsd:sequence>
-            <xsd:attribute ref="bossID"/>
+            <xsd:attribute ref="bossId"/>
         </xsd:complexType>
     </xsd:element>
 
     <!--Attributes-->
-    <xsd:attribute name="bossID" type="xsd:integer"/>
+    <xsd:attribute name="bossId" type="xsd:integer"/>
 
     <!--Root-->
     <xsd:element name="bosses">
@@ -61,4 +53,5 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
+
 </xsd:schema>

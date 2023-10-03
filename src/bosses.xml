@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bosses xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="bosses.xsd">
 
-    <!--Gundyr-->
-    <boss bossID="1">
+    <!--Iudex-->
+    <boss bossId="1">
         <bossName>Iudex Gundyr</bossName>
         <location>Cemetery of Ash</location>
         <stats>
@@ -10,138 +10,378 @@
             <Poise>185.00</Poise>
             <Souls>3000</Souls>
         </stats>
-        <drops>
-            <drop>
-                <dropName>Coiled Sword</dropName>
-                <description>
-                    Sword missing from the shrine bonfire.
-                    Cannot be equipped as a weapon.
-
-                    Thrust into the shrine bonfire to restore its power and enable travel between bonfires.
-
-                    This sword is only bequeathed to chosen ash, as judged by the Iudex, who awaits the arrival of ash as a scabbard.
-                </description>
-            </drop>
-        </drops>
+        <drop>
+            <dropName>Coiled Sword</dropName>
+            <description>
+                Sword missing from the shrine bonfire.
+                Cannot be equipped as a weapon.
+                Thrust into the shrine bonfire to restore its power and enable travel between bonfires.
+                This sword is only bequeathed to chosen ash, as judged by the Iudex, who awaits the arrival of ash as a scabbard.
+            </description>
+        </drop>
     </boss>
 
     <!--Vordt-->
-    <boss bossID="2">
+    <boss bossId="2">
         <bossName>Vordt of the Boreal Valley</bossName>
         <location>High Wall of Lothric</location>
         <stats>
-            <HP>1037</HP>
-            <Poise>185.00</Poise>
+            <HP>1328</HP>
+            <Poise>200.00</Poise>
             <Souls>3000</Souls>
         </stats>
-        <drops>
-            <drop>
-                <dropName>Coiled Sword</dropName>
-                <description>
-                    Sword missing from the shrine bonfire.
-                    Cannot be equipped as a weapon.
+        <drop>
+            <dropName>Soul of Boreal Valley Vordt</dropName>
+            <description>
+                Soul of Vordt of the Boreal Valley.
+                One of the twisted souls, steeped in strength.
+                Use to acquire many souls, or transpose to extract its true strength.
+                Vordt served as an outrider knight, never far from the fleeting dancer.
 
-                    Thrust into the shrine bonfire to restore its power and enable travel between bonfires.
-
-                    This sword is only bequeathed to chosen ash, as judged by the Iudex, who awaits the arrival of ash as a scabbard.
-                </description>
-            </drop>
-        </drops>
+            </description>
+        </drop>
     </boss>
 
     <!--Greatwood-->
-    <boss bossID="3">
-        <bossName>Curse-rotted Greatwood</bossName>
+    <boss bossId="3">
+        <bossName>Curse-Rotted Greatwood</bossName>
         <location>Undead Settlement</location>
         <stats>
-            <HP>1037</HP>
-            <Poise>185.00</Poise>
-            <Souls>3000</Souls>
+            <HP>5405</HP>
+            <Poise>999.99</Poise>
+            <Souls>7000</Souls>
         </stats>
-        <drops>
-            <drop>
-                <dropName>Coiled Sword</dropName>
-                <description>
-                    Sword missing from the shrine bonfire.
-                    Cannot be equipped as a weapon.
+        <drop>
+            <dropName>Soul of the Rotted Greatwood</dropName>
+            <description>
+                Soul of the Curse-rotted Greatwood.
+                One of the twisted souls, steeped in strength.
+                Use to acquire many souls, or transpose to extract its true strength.
+                Ever since its establishment, all manner of curses have managed to seep into the Undead Settlement. The worst of them were sealed away inside a spirit tree, but eventually the curses took their toll.
+            </description>
+        </drop>
+    </boss>
 
-                    Thrust into the shrine bonfire to restore its power and enable travel between bonfires.
+    <!--Sage-->
+    <boss bossId="4">
+        <bossName>Crystal Sage</bossName>
+        <location>Road of Sacrifices</location>
+        <stats>
+            <HP>2723</HP>
+            <Poise>0.00</Poise>
+            <Souls>8000</Souls>
+        </stats>
+        <drop>
+            <dropName>Soul of a Crystal Sage</dropName>
+            <description>
+                Soul of a Crystal Sage.
+                One of the twisted souls, steeped in strength.
+                Use to acquire numerous souls, or transpose to extract its true strength.
+                The twin Crystal Sages once served as spiritual guides to the scholars of the Grand Archives, and one went on to ally with the Undead Legion.
+            </description>
+        </drop>
+    </boss>
 
-                    This sword is only bequeathed to chosen ash, as judged by the Iudex, who awaits the arrival of ash as a scabbard.
-                </description>
-            </drop>
-        </drops>
+    <!--Deacons-->
+    <boss bossId="5">
+        <bossName>Deacons of the Deep</bossName>
+        <location>Cathedral of the Deep</location>
+        <stats>
+            <HP>4099</HP>
+            <Poise>0.00</Poise>
+            <Souls>13000</Souls>
+        </stats>
+        <drop>
+            <dropName>Soul of the Deacons of the Deep</dropName>
+            <description>
+                Soul of the Deacons of the Deep.
+                One of the twisted souls, steeped in strength.
+                Use to acquire numerous souls, or transpose to extract its true strength.
+                After Aldrich left for the Boreal valley, Archdeacon Royce remained in the cathedral with the high priests, to keep eternal watch over their master's coffin.
+            </description>
+        </drop>
+    </boss>
+
+    <!--Watchers-->
+    <boss bossId="6">
+        <bossName>Abyss Watchers</bossName>
+        <location>Farron Keep</location>
+        <stats>
+            <HP>1548</HP>
+            <Poise>0.00</Poise>
+            <Souls>18000</Souls>
+        </stats>
+        <drop>
+            <dropName>Soul of the Blood of the Wolf</dropName>
+            <description>
+                Soul of the Blood of the Wolf.
+                One of the twisted souls, steeped in strength.
+                Use to acquire numerous souls, or transpose to extract its true strength.
+                The blood was spread amongst the Abyss Watchers, and their souls are one with the soul of the wolf blood master.
+            </description>
+        </drop>
     </boss>
 
     <!--Wolnir-->
-    <boss bossID="4">
+    <boss bossId="7">
         <bossName>High Lord Wolnir</bossName>
-        <location>Carthus Catacombs</location>
+        <location>Catacombs of Carthus</location>
         <stats>
-            <HP>1037</HP>
-            <Poise>185.00</Poise>
-            <Souls>3000</Souls>
+            <HP>15041</HP>
+            <Poise>150.00</Poise>
+            <Souls>22000</Souls>
         </stats>
-        <drops>
-            <drop>
-                <dropName>Coiled Sword</dropName>
-                <description>
-                    Sword missing from the shrine bonfire.
-                    Cannot be equipped as a weapon.
+        <drop>
+            <dropName>Soul of High Lord Wolnir</dropName>
+            <description>
+                Soul of the High Lord Wolnir.
+                One of the twisted souls, steeped in strength.
+                Use to acquire many souls, or transpose to extract its true strength.
+                Lord Wolnir of Carthus sentenced countless souls to gruesome deaths, keen to outlive them all.
+            </description>
+        </drop>
+    </boss>
 
-                    Thrust into the shrine bonfire to restore its power and enable travel between bonfires.
+    <!--Demon-->
+    <boss bossId="8">
+        <bossName>Old Demon King</bossName>
+        <location>Smouldering Lake</location>
+        <stats>
+            <HP>5301</HP>
+            <Poise>170.00</Poise>
+            <Souls>25000</Souls>
+        </stats>
+        <drop>
+            <dropName> Soul of the Old Demon King </dropName>
+            <description>
+                Soul of the Old Demon King.
+                One of the twisted souls, steeped in strength.
+                Use to acquire many souls, or transpose to extract its true strength.
+                The shriveled Old Demon King is now like a clump of burnt ash, but he is the last living witness of the Chaos of Izalith.
+            </description>
+        </drop>
+    </boss>
 
-                    This sword is only bequeathed to chosen ash, as judged by the Iudex, who awaits the arrival of ash as a scabbard.
-                </description>
-            </drop>
-        </drops>
+    <!--Sulyvahn-->
+    <boss bossId="9">
+        <bossName>Pontiff Sulyvahn</bossName>
+        <location>Irithyll of the Boreal Valley</location>
+        <stats>
+            <HP>5106</HP>
+            <Poise>150.00</Poise>
+            <Souls>28000</Souls>
+        </stats>
+        <drop>
+            <dropName> Soul of Pontiff Sulyvahn </dropName>
+            <description>
+                Soul of Pontiff Sulyvahn.
+                One of the twisted souls, steeped in strength.
+                Use to acquire many souls, or transpose to extract its true strength.
+                Pontiff Sulyvahn of Irithyll imprisoned a god of the old royalty in the abandoned cathedral, to be fed to the devourer.
+            </description>
+        </drop>
+    </boss>
+
+    <!--Aldrich-->
+    <boss bossId="10">
+        <bossName>Aldrich, Devourer of Gods</bossName>
+        <location>Anor Londo</location>
+        <stats>
+            <HP>4727</HP>
+            <Poise>285.71</Poise>
+            <Souls>50000</Souls>
+        </stats>
+        <drop>
+            <dropName> Soul of Aldrich </dropName>
+            <description>
+                Soul of Aldrich.
+                One of the twisted souls, steeped in strength.
+                Use to acquire many souls, or transpose to extract its true strength.
+                When Aldrich ruminated on the fading of the fire, it inspired visions of a coming age of the deep sea.
+                He knew the path would be arduous, but he had no fear. He would devour the gods himself.
+            </description>
+        </drop>
     </boss>
 
     <!--Yhorm-->
-    <boss bossID="5">
+    <boss bossId="11">
         <bossName>Yhorm the Giant</bossName>
-        <location>The Profaned Capital</location>
+        <location>Profaned Capital</location>
         <stats>
-            <HP>1037</HP>
-            <Poise>185.00</Poise>
-            <Souls>3000</Souls>
+            <HP>27822</HP>
+            <Poise>218.74</Poise>
+            <Souls>36000</Souls>
         </stats>
-        <drops>
-            <drop>
-                <dropName>Coiled Sword</dropName>
-                <description>
-                    Sword missing from the shrine bonfire.
-                    Cannot be equipped as a weapon.
-
-                    Thrust into the shrine bonfire to restore its power and enable travel between bonfires.
-
-                    This sword is only bequeathed to chosen ash, as judged by the Iudex, who awaits the arrival of ash as a scabbard.
-                </description>
-            </drop>
-        </drops>
+        <drop>
+            <dropName> Soul of Yhorm the Giant </dropName>
+            <description>
+                Soul of Yhorm the Giant.
+                One of the twisted souls, steeped in strength.
+                Use to acquire numerous souls, or transpose to extract its true strength.
+                Yhorm is the descendant of an ancient conqueror, but was asked by the very people once subjugated to lead them, serving as both a weighty blade and a stone-hard shield.
+            </description>
+        </drop>
     </boss>
 
-    <!--Midir-->
-    <boss bossID="6">
-        <bossName>Dark-Eater Midir</bossName>
-        <location>The Ringed City</location>
+    <!--Dancer-->
+    <boss bossId="12">
+        <bossName>Dancer of the Boreal Valley</bossName>
+        <location>High Wall of Lothric</location>
         <stats>
-            <HP>1037</HP>
-            <Poise>185.00</Poise>
-            <Souls>3000</Souls>
+            <HP>5111</HP>
+            <Poise>170.00</Poise>
+            <Souls>60000</Souls>
         </stats>
-        <drops>
-            <drop>
-                <dropName>Coiled Sword</dropName>
-                <description>
-                    Sword missing from the shrine bonfire.
-                    Cannot be equipped as a weapon.
-
-                    Thrust into the shrine bonfire to restore its power and enable travel between bonfires.
-
-                    This sword is only bequeathed to chosen ash, as judged by the Iudex, who awaits the arrival of ash as a scabbard.
-                </description>
-            </drop>
-        </drops>
+        <drop>
+            <dropName> Soul of the Dancer </dropName>
+            <description>
+                Soul of the dancer.
+                One of the twisted souls, steeped in strength.
+                Use to acquire many souls, or transpose to extract its true strength.
+                The Pontiff Sulyvahn bestowed a double-slashing sword upon a distant daughter of the formal royal family, ordering her to serve first as a dancer, and then as an outrider knight, the equivalent to exile.
+            </description>
+        </drop>
     </boss>
+
+    <!--Oceiros-->
+    <boss bossId="13">
+        <bossName> Oceiros, The Consumed King </bossName>
+        <location>Consumed King's Garden</location>
+        <stats>
+            <HP>8087</HP>
+            <Poise>120.00</Poise>
+            <Souls>58000</Souls>
+        </stats>
+        <drop>
+            <dropName> Soul of Consumed Oceiros </dropName>
+            <description>
+                Soul of Oceiros, the Consumed King.
+                One of the twisted souls, steeped in strength.
+                Use to acquire numerous souls, or transpose to extract its true strength.
+                Oceiros went mad trying to harness his royal blood for a greater purpose, leading him to the heretics of the Grand Archives, where he discovered the twisted worship of Seath the paledrake.
+            </description>
+        </drop>
+    </boss>
+
+    <!--Champion-->
+    <boss bossId="14">
+        <bossName>Champion Gundyr</bossName>
+        <location>Untended Graves </location>
+        <stats>
+            <HP>4956</HP>
+            <Poise>185.00</Poise>
+            <Souls>60000</Souls>
+        </stats>
+        <drop>
+            <dropName> Soul of Champion Gundyr </dropName>
+            <description>
+                Soul of Champion Gundyr.
+                One of the twisted souls, steeped in strength.
+                Use to acquire numerous souls, or transpose to extract its true strength.
+                Once, a champion came late to the festivities, and was greeted by a shrine without fire, and a bell that would not toll.
+            </description>
+        </drop>
+    </boss>
+
+    <!--Wyvern-->
+    <boss bossId="15">
+        <bossName>Ancient Wyvern</bossName>
+        <location>Archdragon Peak</location>
+        <stats>
+            <HP>7873</HP>
+            <Poise>999.99</Poise>
+            <Souls>70000</Souls>
+        </stats>
+        <drop>
+            <dropName> Dragon Head Stone </dropName>
+            <description>
+                Stone imbued with the power of the everlasting dragons, used in a secret rite by dragon worshippers.
+                Gain the head of a dragon and emit dragon breath, a transformation that is irreversible until death.
+                Those who choose the path of the dragon strive for perfect imitation, and the dragon head rite is the first step in this grand process.
+            </description>
+        </drop>
+    </boss>
+
+    <!--Nameless-->
+    <boss bossId="16">
+        <bossName>The Nameless King</bossName>
+        <location>Archdragon Peak</location>
+        <stats>
+            <HP>4577</HP>
+            <Poise>999.99</Poise>
+            <Souls>80000</Souls>
+        </stats>
+        <drop>
+            <dropName> Soul of the Nameless King </dropName>
+            <description>
+                Soul of the Nameless King.
+                One of the twisted souls, steeped in strength.
+                Use to acquire many souls, or transpose to extract its true strength.
+                The Nameless King was once a dragon-slaying god of war, before he sacrificed everything to ally himself with the ancient dragons.
+            </description>
+        </drop>
+    </boss>
+
+    <!--Armour-->
+    <boss bossId="17">
+        <bossName>Dragonslayer Armour</bossName>
+        <location>Lothric Castle</location>
+        <stats>
+            <HP>4581</HP>
+            <Poise>300.00</Poise>
+            <Souls>64000</Souls>
+        </stats>
+        <drop>
+            <dropName>Soul of Dragonslayer Armour</dropName>
+            <description>
+                Soul of the Dragonslayer Armour.
+                One of the twisted souls, steeped in strength.
+                Use to acquire many souls, or transpose to extract its true strength.
+                The Dragonslayer Armour, controlled by the Pilgrim Butterfly, lost its master long ago, but still remembers their sporting hunts.
+            </description>
+        </drop>
+    </boss>
+
+    <!--Princes-->
+    <boss bossId="18">
+        <bossName>The Twin Princes</bossName>
+        <location>Grand Archives</location>
+        <stats>
+            <HP>4294</HP>
+            <Poise>210.00</Poise>
+            <Souls>85000</Souls>
+        </stats>
+        <drop>
+            <dropName>Soul of the Twin Princes</dropName>
+            <description>
+                Soul of the Twin Princes.
+                One of the twisted souls, steeped in strength.
+                Use to acquire numerous souls, or transpose to extract its true strength.
+                The two princes rejected their duty to become Lords of Cinder, and settled down far, far away to watch the fire fade from a distance. A curse makes their souls nearly inseparable.
+            </description>
+        </drop>
+    </boss>
+
+    <!--Cinder-->
+    <boss bossId="19">
+        <bossName>Soul of Cinder</bossName>
+        <location>Kiln of the First Flame</location>
+        <stats>
+            <HP>6557</HP>
+            <Poise>170.00</Poise>
+            <Souls>100000</Souls>
+        </stats>
+        <drop>
+            <dropName>Soul of the Lords</dropName>
+            <description>
+                Soul of the Lords.
+                One of the twisted souls, steeped in strength.
+                Use to acquire numerous souls, or transpose to extract its true strength.
+                Since Lord Gwyn, the first Lord of Cinder, many exalted lords have linked the First Flame, and it is their very souls that have manifested themselves as defender of the flame.
+            </description>
+        </drop>
+    </boss>
+
 </bosses>
+
+
