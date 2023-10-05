@@ -1,7 +1,7 @@
 public class Boss {
 
     //Class attributes
-    private int bossID;
+    private int bossId;
     private String bossName;
     private int HP;
     private double Poise;
@@ -11,9 +11,9 @@ public class Boss {
 
     // Getter and Setter for bossID
     public int getBossID() {
-        return bossID;
+        return bossId;
     }
-    public void setBossID(int bossID) { this.bossID = bossID; }
+    public void setBossID(int bossID) { this.bossId = bossID; }
 
     // Getter and Setter for bossName
     public String getBossName() {
