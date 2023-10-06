@@ -3,11 +3,31 @@ public class Boss {
     //Class attributes
     private int bossId;
     private String bossName;
+    private String location;
     private int HP;
     private double Poise;
     private int Souls;
     private String dropName;
     private String description;
+
+    //Empty constructor
+    public Boss(){}
+
+    //Complete constructor
+    public Boss(int bossId, String bossName, String location, int HP, double Poise,
+                int Souls, String dropName, String description){
+
+        this.bossId = bossId;
+        this.bossName = bossName;
+        this.location = location;
+        this.HP = HP;
+        this.Poise = Poise;
+        this.Souls = Souls;
+        this.dropName = dropName;
+        this.description = description;
+    }
+
+//GETTERS AND SETTERS
 
     // Getter and Setter for bossID
     public int getBossID() {
@@ -29,6 +49,14 @@ public class Boss {
     }
     public void setHP(int HP) {
         this.HP = HP;
+    }
+
+    //Getter and Setter for Location
+    public String getLocation() {
+        return location;
+    }
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     // Getter and Setter for Poise
