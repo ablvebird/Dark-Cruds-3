@@ -82,18 +82,19 @@ public class DomManager {
         }
     }
 
+
     //Create new XML from domManager and the bosses whose attribute matches the constraints by category
     public void newXML(String category, String constraint) throws Exception {
-        // 1. Create a new Document and specify the XML structure
+        //Create the new document
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document newDoc = dBuilder.newDocument();
 
-        // 2. Create the root element for the new document
+        //Define root element
         Element rootElement = newDoc.createElement("bosses");
         newDoc.appendChild(rootElement);
 
-        // 3. Iterate through the bosses in the original XML, filter those with a matching attribute, and add them to the new Document.
+        //Iterate through bosses in original XML, filters matching attribute, and adds them to document
         NodeList nList = doc.getElementsByTagName("boss");
         for (int index = 0; index < nList.getLength(); index++) {
             Node nNode = nList.item(index);
@@ -101,26 +102,24 @@ public class DomManager {
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) nNode;
 
-                // Get the value of the specified attribute (e.g., "location")
+                //Gets attribute value
                 String bossAttribute = eElement.getAttribute(category);
 
                 if (bossAttribute.equals(constraint)) {
-                    // Import the whole boss element to the new document
+                    //Imports element to document
                     Node importedNode = newDoc.importNode(eElement, true);
                     rootElement.appendChild(importedNode);
                 }
             }
         }
 
-        // 4. Save the new Document as an XML file with a suitable name.
+        //Saves document as XML
         String newFilePath = "bosses_by_" + category + ".xml";
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
         DOMSource source = new DOMSource(newDoc);
         StreamResult result = new StreamResult(new File(newFilePath));
         transformer.transform(source, result);
-
-        //Future update --> Handle exceptions appropriately.
     }
 
     //Helper method for cloning elements to new XML

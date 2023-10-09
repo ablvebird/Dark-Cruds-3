@@ -1,6 +1,5 @@
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -47,14 +46,12 @@ public class Main {
 
     //JDOM
         JDomManager jDomManager = new JDomManager();
-        List<Boss> bL = new ArrayList<>();
-        bL=jDomManager.createBossList();
 
         //Print XML
         jDomManager.printXML();
 
         //Generate new XML
+        List<Boss> bL=jDomManager.createBossList();
         jDomManager.generateXML(bL);
-
     }
 }

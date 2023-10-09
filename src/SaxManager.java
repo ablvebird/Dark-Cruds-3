@@ -21,12 +21,12 @@ public class SaxManager extends DefaultHandler {
     boolean bDropName = false;
     boolean bDescription = false;
 
-
     public SaxManager(String filePath){
         this.file=new File(filePath);
     }
 
     @Override
+    //Start of element
     public void startElement(String uri, String localName,
                              String qName, Attributes attributes)
             throws SAXException {
@@ -37,6 +37,7 @@ public class SaxManager extends DefaultHandler {
             bBoss = true;
         }
         else if(bBoss){
+            //Inside a <boss> element, set booleans based on element names
             if (qName.equalsIgnoreCase("bossId")) {
                 bBossId = true;
             }
@@ -65,6 +66,7 @@ public class SaxManager extends DefaultHandler {
     }
 
     @Override
+    //End of element
     public void endElement(String uri, String localName, String qName)
             throws SAXException {
         if(qName.equalsIgnoreCase("boss")){
@@ -73,6 +75,7 @@ public class SaxManager extends DefaultHandler {
     }
 
     @Override
+    //Characters between XML tags
     public void characters(char ch[], int start, int length) throws SAXException {
         if (bBossName){
             System.out.println("Name: "+new String(ch, start, length));

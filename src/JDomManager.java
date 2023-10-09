@@ -12,6 +12,7 @@ import java.util.List;
 public class JDomManager {
     private static final String FILENAME = "src/bosses.xml";
 
+    //Reads and prints XML
     public void printXML(){
         try{
             SAXBuilder sB = new SAXBuilder();
@@ -20,21 +21,20 @@ public class JDomManager {
             sB.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
             sB.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 
-            // XML is a local file
             Document doc = sB.build(new File(FILENAME));
-
             Element rootNode = doc.getRootElement();
-            List<Element> list = rootNode.getChildren("boss");
+            List<Element> bossList = rootNode.getChildren("boss");
 
-            for (Element target : list){
-                String bossId=target.getAttributeValue("bossId");
-                String bossName = target.getChildText("bossName");
-                String location = target.getChildText("location");
-                String HP = target.getChildText("HP");
-                String Poise = target.getChildText("Poise");
-                String Souls = target.getChildText("Souls");
-                String dropName = target.getChildText("dropName");
-                String description = target.getChildText("description");
+            //Gets and prints list of attributes for each list member
+            for (Element boss : bossList){
+                String bossId=boss.getAttributeValue("bossId");
+                String bossName = boss.getChildText("bossName");
+                String location = boss.getChildText("location");
+                String HP = boss.getChildText("HP");
+                String Poise = boss.getChildText("Poise");
+                String Souls = boss.getChildText("Souls");
+                String dropName = boss.getChildText("dropName");
+                String description = boss.getChildText("description");
 
                 System.out.println("Boss Id: " + bossId);
                 System.out.println("Boss Name: " + bossName);
@@ -51,13 +51,14 @@ public class JDomManager {
         }
     }
 
+    //Creates new Boss List through serialization
     public List<Boss> createBossList() {
         List<Boss> bossList = new ArrayList<>();
 
         // Create Boss objects using the constructor and add them to the list
-        Boss boss1 = new Boss(1, "Boss1", "Location1", 100, 50.0, 200, "Drop1", "Description1");
-        Boss boss2 = new Boss(2, "Boss2", "Location2", 150, 60.0, 250, "Drop2", "Description2");
-        Boss boss3 = new Boss(3, "Boss3", "Location3", 120, 55.0, 220, "Drop3", "Description3");
+        Boss boss1 = new Boss(1, "TestBoss1", "TestLocation1", 100, 50.0, 200, "Drop1", "Description1");
+        Boss boss2 = new Boss(2, "TestBoss2", "TestLocation2", 150, 60.0, 250, "Drop2", "Description2");
+        Boss boss3 = new Boss(3, "TestBoss3", "TestLocation3", 120, 55.0, 220, "Drop3", "Description3");
 
         bossList.add(boss1);
         bossList.add(boss2);
@@ -66,6 +67,7 @@ public class JDomManager {
         return bossList;
     }
 
+    //Generates new XML with data from createBossList method
     public void generateXML(List<Boss> bL){
         try{
             //Root
@@ -88,6 +90,7 @@ public class JDomManager {
         }
     }
 
+    //Used in generateXML method -->
     private Element createBossElement(Boss boss){
         Element bossElement = new Element("boss");
         bossElement.setAttribute("bossId", String.valueOf(boss.getBossID()));
@@ -101,6 +104,7 @@ public class JDomManager {
         return bossElement;
     }
 
+    //Used in createBossElement --> Adds text to boss attribute
     private Element createElementWithText(String elementName, String text){
         Element element = new Element(elementName);
         element.setText(text);

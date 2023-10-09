@@ -12,6 +12,8 @@
       <root url="jar://$PROJECT_DIR$/../../../../Libraries/jdom2/jdom-2.0.6.1-contrib-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../../Libraries/jdom2/jdom-2.0.6.1-junit-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../../Libraries/jdom2/jdom-2.0.6.1-sources.jar!/" />
+      <root url="file://$USER_HOME$/Libraries/JDom2" />
     </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/Libraries/JDom2" recursive="false" type="SOURCES" />
   </library>
 </component>
