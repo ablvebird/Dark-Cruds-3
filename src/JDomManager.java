@@ -3,7 +3,6 @@ import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
-
 import javax.xml.XMLConstants;
 import java.io.File;
 import java.io.FileWriter;
