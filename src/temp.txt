@@ -1,68 +1,35 @@
-import org.w3c.dom.*;
-import org.xml.sax.SAXException;
-import javax.xml.parsers.*;
-import java.io.*;
+Certainly! You can create a separate XMLTransformer class for the project to encapsulate the XML to HTML transformation logic. Here's how you can structure the XMLTransformer class:
 
-public class DomManager {
-    private File file;
-    private Document doc;
+java
 
-    public DomManager(String filePath) {
-        this.file = new File(filePath);
-    }
+import javax.xml.transform.*;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
-    public void parseXml() {
-        try {
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            this.doc = dBuilder.parse(file);
-            doc.getDocumentElement().normalize();
-        } catch (IOException | ParserConfigurationException | SAXException e) {
-            e.printStackTrace();
-        }
-    }
+public class XMLTransformer {
 
-    public int getNumberOfBosses() {
-        NodeList nList = doc.getElementsByTagName("boss");
-        return nList.getLength();
-    }
+    public static void transformXMLToHTML(String xmlFilePath, String xsltFilePath, String htmlOutputFilePath) throws TransformerException, IOException {
+        // Create a TransformerFactory
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
 
-    public void printBossData() {
-        NodeList nList = doc.getElementsByTagName("boss");
-        for (int index = 0; index < nList.getLength(); index++) {
-            Node nNode = nList.item(index);
+        // Specify the XSLT file
+        StreamSource xsltSource = new StreamSource(new File(xsltFilePath));
 
-            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                Element eElement = (Element) nNode;
+        // Create a Transformer for the XSLT stylesheet
+        Transformer transformer = transformerFactory.newTransformer(xsltSource);
 
-                System.out.println("Boss id: " + eElement.getAttribute("bossId"));
-                System.out.println("Name: " + eElement.getElementsByTagName("bossName").item(0).getTextContent());
-                System.out.println("Location: " + eElement.getElementsByTagName("location").item(0).getTextContent());
-                System.out.println("Hit Points: " + eElement.getElementsByTagName("HP").item(0).getTextContent());
-                System.out.println("Poise: " + eElement.getElementsByTagName("Poise").item(0).getTextContent());
-                System.out.println("Souls: " + eElement.getElementsByTagName("Souls").item(0).getTextContent());
-                System.out.println("Item dropped: " + eElement.getElementsByTagName("dropName").item(0).getTextContent());
-                System.out.println("Item description: " + eElement.getElementsByTagName("description").item(0).getTextContent() + "\n");
-            }
-        }
-    }
+        // Specify the XML source file
+        StreamSource xmlSource = new StreamSource(new File(xmlFilePath));
 
-    public void readXmlOfUnknownStructure() {
-        NodeList nList = doc.getElementsByTagName("boss");
-        for (int index = 0; index < nList.getLength(); index++) {
-            Node nNode = nList.item(index);
+        // Create an output stream for the HTML result
+        try (FileOutputStream htmlOutput = new FileOutputStream(htmlOutputFilePath)) {
+            StreamResult htmlResult = new StreamResult(htmlOutput);
 
-            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                Element eElement = (Element) nNode;
-
-                if (eElement.hasChildNodes()) {
-                    NodeList nl = nNode.getChildNodes();
-                    for (int index2 = 0; index2 < nl.getLength(); index2++) {
-                        Node nd = nl.item(index2);
-                        System.out.println(nd.getTextContent());
-                    }
-                }
-            }
+            // Apply the XSLT transformation and save as HTML
+            transformer.transform(xmlSource, htmlResult);
         }
     }
 }
