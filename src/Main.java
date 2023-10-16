@@ -1,5 +1,6 @@
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -12,8 +13,8 @@ public class Main {
         //Parsing
         domManager.parseXML();
 
-        //Simple query: number of bosses
-        int numberOfBosses = domManager.getNumBosses();
+        //Simple query: logs number of bosses
+        System.out.println("Number of bosses: "+domManager.getNumBosses());
 
         //Printing XML in console
         domManager.printBossData();
@@ -46,12 +47,26 @@ public class Main {
 
     //JDOM
         JDomManager jDomManager = new JDomManager();
+        List<Boss> bL = new ArrayList<>();
+        bL=jDomManager.createBossList();
 
         //Print XML
         jDomManager.printXML();
 
         //Generate new XML
-        List<Boss> bL=jDomManager.createBossList();
         jDomManager.generateXML(bL);
+
+    //XSLT
+        try{
+            String xmlPath = "src/bosses.xml";
+            String xslPath = "src/bosses.xsl";
+            String htmlPath = "bossesTransformed.html";
+
+            XMLTransformer.toHTML(xmlPath, xslPath, htmlPath);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
 }
