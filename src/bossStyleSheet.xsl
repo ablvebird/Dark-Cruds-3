@@ -17,14 +17,15 @@
                         <th>Souls</th>
                         <th>Drops</th>
                     </tr>
-                    <xsl:for-each select="student/s">
+                    <xsl:for-each select="boss">
                         <tr>
-                            <th><xsl:value-of select="bossName"</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            <th><xsl:value-of select="bossName"></xsl:value-of></th>
+                            <th><xsl:value-of select="location"></xsl:value-of></th>
+                            <th><xsl:value-of select="HP"></xsl:value-of></th>
+                            <th><xsl:value-of select="Poise"></xsl:value-of></th>
+                            <th><xsl:value-of select="Souls"></xsl:value-of></th>
+                            <th><xsl:value-of select="dropName"></xsl:value-of></th>
+                            <th><xsl:value-of select="description"></xsl:value-of></th>
                         </tr>
                     </xsl:for-each>
                 </table>
