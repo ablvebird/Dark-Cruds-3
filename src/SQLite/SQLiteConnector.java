@@ -1,4 +1,4 @@
-package UnhospitalDB;
+package SQLite;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
  */
 public class SQLiteConnector {
     private static final String DB_URL = "jdbc:sqlite:";
-    private static final String FULL_PATH = "UnhospitalDB/unhospital.db";
+    private static final String FULL_PATH = "DarkCruds.db";
 
     /**
      * Connect to the SQLite database.

@@ -10,7 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * The XMLManagers.XMLTransformer class provides a method to transform an XML document using an XSLT stylesheet
+ * The XMLTransformer class provides a method to transform an XML document using an XSLT stylesheet
  * and generate an HTML document as output.
  */
 public class XMLTransformer {
@@ -27,19 +27,19 @@ public class XMLTransformer {
     public static void toHTML(String xmlPath, String xslPath, String htmlPath)
             throws TransformerException, IOException {
 
-        // Source linking
+        //1)Source linking
         StreamSource xslSource = new StreamSource(new File(xslPath));
         StreamSource xmlSource = new StreamSource(new File(xmlPath));
 
-        // Factory and Transformer
+        //2)Factory and Transformer
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer(xslSource);
 
-        // Output stream for HTML
+        //3)Output stream for HTML
         try (FileOutputStream htmlOutput = new FileOutputStream(htmlPath)) {
             StreamResult htmlResult = new StreamResult(htmlOutput);
 
-            // Applies XSLT transformation
+            //4)Applies XSLT transformation
             transformer.transform(xmlSource, htmlResult);
         }
     }
