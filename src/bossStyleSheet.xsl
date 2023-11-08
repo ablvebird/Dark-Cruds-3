@@ -9,7 +9,7 @@
                 <table>
 
                     <tr>
-                        <th>Boss Name</th>
+                        <th>Entities.Boss Name</th>
                         <th>Location</th>
                         <th>HP</th>
                         <th>Poise</th>

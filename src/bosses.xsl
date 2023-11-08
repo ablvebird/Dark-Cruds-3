@@ -7,7 +7,7 @@
                 <title>Bosses</title>
             </head>
             <body>
-                <h1>Dark Souls 3 Boss List</h1>
+                <h1>Dark Souls 3 Entities.Boss List</h1>
                 <table border="1">
                     <tr>
                         <th>ID</th>

@@ -1,4 +1,4 @@
-Certainly! You can create a separate XMLTransformer class for the project to encapsulate the XML to HTML transformation logic. Here's how you can structure the XMLTransformer class:
+Certainly! You can create a separate XMLManagers.XMLTransformer class for the project to encapsulate the XML to HTML transformation logic. Here's how you can structure the XMLManagers.XMLTransformer class:
 
 java
 
@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class XMLTransformer {
+public class XMLManagers.XMLTransformer {
 
     public static void transformXMLToHTML(String xmlFilePath, String xsltFilePath, String htmlOutputFilePath) throws TransformerException, IOException {
         // Create a TransformerFactory
