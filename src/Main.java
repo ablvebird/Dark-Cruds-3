@@ -1,4 +1,5 @@
 import Entities.Boss;
+import Entities.BossManager;
 import XMLManagers.DomManager;
 import XMLManagers.JDomManager;
 import XMLManagers.SaxManager;
@@ -12,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         DOMTest();
         SAXTest();
-        DOMTest();
+        JDOMTest();
         XSLTTest();
         //SQLiteTest();
 
@@ -64,25 +65,38 @@ public class Main {
     //JDOM
     public static void JDOMTest(){
 
+        //1)Instancing managers
+        BossManager bossManager = new BossManager();
         JDomManager jDomManager = new JDomManager();
-        List<Boss> bL;
-        bL=jDomManager.createBossList();
 
-        //Print XML
-        jDomManager.printXML();
+        //2)Setting Boss List from XML and iterating elements
+        bossManager.setBossList(jDomManager.readXML());
+        System.out.println("List size: "+bossManager.getBossList().size());
+        bossManager.showList(bossManager.getBossList());
 
-        //Generate new XML
-        jDomManager.generateXML(bL);
+        //3)Creating new Boss List from XML, generating and printing
+        List<Boss> newBossList=bossManager.createBossList();
+        System.out.println("List size: "+newBossList.size());
+        bossManager.showList(newBossList);
+
+        //4)Generating new XML from list and printing
+        String fileName="newTestBosses";
+        jDomManager.generateXML(newBossList, fileName);
+        jDomManager.printXML(fileName);
+
+        jDomManager.printXML(jDomManager.getFilename());
     }
 
 
     //XSLT
     public static void XSLTTest(){
         try{
+            //1)Resource linking
             String xmlPath = "src/bosses.xml";
             String xslPath = "src/bosses.xsl";
             String htmlPath = "bossesTransformed.html";
 
+            //2)Transforming
             XMLTransformer.toHTML(xmlPath, xslPath, htmlPath);
         }
         catch(Exception e){

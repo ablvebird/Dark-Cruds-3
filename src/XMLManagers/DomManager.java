@@ -17,7 +17,7 @@ import java.io.File;
  * and create new XML documents based on category and constraint criteria.
  */
 public class DomManager {
-    private File file;
+    private final File file;
     private Document doc;
     private Element eElement;
 

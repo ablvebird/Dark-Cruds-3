@@ -11,7 +11,7 @@ import java.io.File;
  */
 public class SaxManager extends DefaultHandler {
 
-    private File file;
+    private final File file;
     private SAXParser parser;
 
     //Booleans to track element states
@@ -77,7 +77,7 @@ public class SaxManager extends DefaultHandler {
 
     @Override
     //4)Characters between XML tags
-    public void characters(char ch[], int start, int length) throws SAXException {
+    public void characters(char[] ch, int start, int length) throws SAXException {
         if (bBossName) {
             System.out.println("Name: " + new String(ch, start, length));
             bBossName = false;

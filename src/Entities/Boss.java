@@ -1,5 +1,8 @@
 package Entities;
 
+/**
+ * Represents a boss entity in Dark Souls 3
+ */
 public class Boss {
 
     //Class attributes
