@@ -32,6 +32,19 @@ public class Boss {
         this.description = description;
     }
 
+    //DB Constructor
+    public Boss(String bossName, String location, int HP, double Poise,
+                int Souls, String dropName, String description){
+
+        this.bossName = bossName;
+        this.location = location;
+        this.HP = HP;
+        this.Poise = Poise;
+        this.Souls = Souls;
+        this.dropName = dropName;
+        this.description = description;
+    }
+
 //GETTERS AND SETTERS
 
     // Getter and Setter for bossID

@@ -1,5 +1,7 @@
 import Entities.Boss;
 import Entities.BossManager;
+import SQLite.SQLiteCRUD;
+import SQLite.SQLiteConnector;
 import XMLManagers.DomManager;
 import XMLManagers.JDomManager;
 import XMLManagers.SaxManager;
@@ -11,11 +13,11 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        DOMTest();
-        SAXTest();
-        JDOMTest();
-        XSLTTest();
-        //SQLiteTest();
+        //DOMTest();
+        //SAXTest();
+        //JDOMTest();
+        //XSLTTest();
+        SQLiteTest();
 
     }
 
@@ -106,6 +108,47 @@ public class Main {
 
 
     //SQLite
-    public static void SQLiteTest(){}
+    public static void SQLiteTest(){
+        //Setting boss list:
+        BossManager bossManager = new BossManager();
+        JDomManager jDomManager = new JDomManager();
+        bossManager.setBossList(jDomManager.readXML());
+        List<Boss> bossList=bossManager.getBossList();
+
+        //Initializing SQLite CRUD
+        SQLiteCRUD sqLiteCRUD = new SQLiteCRUD();
+
+        try{
+            //1)Connection
+            sqLiteCRUD.setConnection(SQLiteConnector.connect());
+
+            //2)Boss count testing
+            sqLiteCRUD.countBosses();
+            sqLiteCRUD.insertBoss(bossList.get(1));
+            System.out.println("Boss added: "+bossList.get(1).getBossName());
+            sqLiteCRUD.countBosses();
+
+            //3)Clean Database
+            sqLiteCRUD.deleteAllBosses();
+
+            //4)Add bosses from list
+            for (Boss boss : bossList){
+                sqLiteCRUD.insertBoss(boss);
+                System.out.println("Boss added: "+boss.getBossName());
+            }
+
+            //5)Insert New Boss
+            Boss newBoss = new Boss("Darkeater Miguel", "The Ringed City", 15860, 500, 150000, "Soul of Darkeater Midir", "Midir, descendant of Archdragons, was raised by the gods, and owing to his immortality was given a duty to eternally battle the dark, a duty that he would never forget, even after the gods perished.");
+            sqLiteCRUD.insertBoss(newBoss);
+
+            //6)Find boss by Name
+            int lastBossID = sqLiteCRUD.findBoss("name", "Darkeater Miguel");
+
+            //7)Update Boss with correct information
+            sqLiteCRUD.updateBoss(lastBossID, "name", "Darkeater Midir");
+
+        }
+        catch (Exception e){e.printStackTrace();}
+    }
 
 }

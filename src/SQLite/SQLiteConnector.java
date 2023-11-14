@@ -9,7 +9,7 @@ import java.sql.SQLException;
  */
 public class SQLiteConnector {
     private static final String DB_URL = "jdbc:sqlite:";
-    private static final String FULL_PATH = "DarkCruds.db";
+    private static final String FULL_PATH = "src/DarkCruds.db";
 
     /**
      * Connect to the SQLite database.
