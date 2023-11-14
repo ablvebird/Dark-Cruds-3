@@ -5,6 +5,7 @@ import Entities.Boss;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * This class provides CRUD operations for the Boss entity in an SQLite database.
@@ -38,7 +39,6 @@ public class SQLiteCRUD {
             System.out.println("Boss inserted into the database.");
         } catch (SQLException e) {
             e.printStackTrace();
-            // Log the exception for tracking
         }
     }
 
@@ -62,7 +62,6 @@ public class SQLiteCRUD {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Log the exception for tracking
         }
     }
 
@@ -89,7 +88,6 @@ public class SQLiteCRUD {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Log the exception for tracking
         }
     }
 
@@ -113,7 +111,6 @@ public class SQLiteCRUD {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            // Log the exception for tracking
         }
 
         result = 0;
@@ -148,7 +145,6 @@ public class SQLiteCRUD {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            // Log or handle the exception as needed
         }
         return bossList;
     }
@@ -166,7 +162,6 @@ public class SQLiteCRUD {
             System.out.println(rowsDeleted + " bosses deleted from the database.");
         } catch (SQLException e) {
             e.printStackTrace();
-            // Log the exception for tracking
         }
     }
 
@@ -195,7 +190,6 @@ public class SQLiteCRUD {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Log the exception for tracking
         }
         return bossID;
     }
@@ -235,7 +229,40 @@ public class SQLiteCRUD {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Log or handle the exception as needed
+        }
+    }
+
+
+    /**
+     * Displays metadata information about the columns in the Boss table.
+     */
+    public void displayColumnMetadata() {
+        String query = "SELECT * FROM Boss LIMIT 1"; // Use LIMIT 1 to fetch only one row for metadata
+
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int columnCount = metaData.getColumnCount();
+
+            System.out.println("Number of Columns: " + columnCount);
+            System.out.println("\nColumn Information:");
+
+            for (int i = 1; i <= columnCount; i++) {
+                System.out.println("Column " + i + ":");
+                System.out.println("  Name: " + metaData.getColumnName(i));
+                System.out.println("  Type: " + metaData.getColumnTypeName(i));
+                System.out.println("  Display Size: " + metaData.getColumnDisplaySize(i));
+                System.out.println("  Precision: " + metaData.getPrecision(i));
+                System.out.println("  Scale: " + metaData.getScale(i));
+                System.out.println("  Nullable: " + (metaData.isNullable(i) == ResultSetMetaData.columnNullable ? "Yes" : "No"));
+                System.out.println("  Auto Increment: " + metaData.isAutoIncrement(i));
+                System.out.println("  Currency: " + metaData.isCurrency(i));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Logger.getLogger(SQLiteCRUD.class.getName()).severe("Error displaying column metadata: " + e.getMessage());
         }
     }
 

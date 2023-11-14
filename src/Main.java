@@ -150,6 +150,11 @@ public class Main {
             //8)Show Boss table, printing Boss data and row number
             sqLiteCRUD.displayBossTable();
 
+            //9)Show Boss table metadata
+            sqLiteCRUD.displayColumnMetadata();
+
+
+
         }
         catch (Exception e){e.printStackTrace();}
     }
