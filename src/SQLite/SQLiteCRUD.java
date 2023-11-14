@@ -267,6 +267,50 @@ public class SQLiteCRUD {
     }
 
 
+    /**
+     * Displays generic information about the database using DatabaseMetaData.
+     */
+    public void displayDatabaseInfo() {
+        try {
+            DatabaseMetaData metaData = connection.getMetaData();
+
+            // Database information
+            System.out.println("Database Product Name: " + metaData.getDatabaseProductName());
+            System.out.println("Database Product Version: " + metaData.getDatabaseProductVersion());
+            System.out.println("Database URL: " + metaData.getURL());
+            System.out.println("Driver Name: " + metaData.getDriverName());
+            System.out.println("Driver Version: " + metaData.getDriverVersion());
+
+            // Table information
+            ResultSet tables = metaData.getTables(null, null, null, null);
+            System.out.println("\nTables:");
+            while (tables.next()) {
+                String tableName = tables.getString("TABLE_NAME");
+                System.out.println("  " + tableName);
+            }
+
+            // Primary key information
+            ResultSet primaryKeys = metaData.getPrimaryKeys(null, null, "Boss");
+            System.out.println("\nPrimary Keys for Boss Table:");
+            while (primaryKeys.next()) {
+                String columnName = primaryKeys.getString("COLUMN_NAME");
+                System.out.println("  " + columnName);
+            }
+
+            // Column information
+            ResultSet columns = metaData.getColumns(null, null, "Boss", null);
+            System.out.println("\nColumns for Boss Table:");
+            while (columns.next()) {
+                String columnName = columns.getString("COLUMN_NAME");
+                String columnType = columns.getString("TYPE_NAME");
+                System.out.println("  " + columnName + " - " + columnType);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * Gets the current database connection.

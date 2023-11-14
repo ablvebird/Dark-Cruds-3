@@ -153,7 +153,8 @@ public class Main {
             //9)Show Boss table metadata
             sqLiteCRUD.displayColumnMetadata();
 
-
+            //10)Display DB info
+            sqLiteCRUD.displayDatabaseInfo();
 
         }
         catch (Exception e){e.printStackTrace();}
