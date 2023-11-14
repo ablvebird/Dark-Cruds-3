@@ -6,12 +6,22 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class provides CRUD operations for the Boss entity in an SQLite database.
+ */
 public class SQLiteCRUD {
     private Connection connection;
 
-    public SQLiteCRUD(){}
+    /**
+     * Default constructor.
+     */
+    public SQLiteCRUD() {}
 
-
+    /**
+     * Inserts a new Boss into the database.
+     *
+     * @param boss The Boss object to be inserted.
+     */
     public void insertBoss(Boss boss) {
         try (PreparedStatement statement = connection.prepareStatement(
                 "INSERT INTO Boss (name, location, hp, poise, souls, drop_name, description) VALUES (?, ?, ?, ?, ?, ?, ?)"
@@ -28,10 +38,16 @@ public class SQLiteCRUD {
             System.out.println("Boss inserted into the database.");
         } catch (SQLException e) {
             e.printStackTrace();
+            // Log the exception for tracking
         }
     }
 
-    public void deleteBoss(int bossID){
+    /**
+     * Deletes a Boss from the database based on the provided ID.
+     *
+     * @param bossID The ID of the Boss to be deleted.
+     */
+    public void deleteBoss(int bossID) {
         String query = "DELETE FROM Boss WHERE id = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -46,11 +62,18 @@ public class SQLiteCRUD {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            // Log the exception for tracking
         }
     }
 
-
-    public void updateBoss(int bossID, String field, String newInfo){
+    /**
+     * Updates a Boss in the database based on the provided ID and field.
+     *
+     * @param bossID   The ID of the Boss to be updated.
+     * @param field    The field to be updated.
+     * @param newInfo  The new information for the specified field.
+     */
+    public void updateBoss(int bossID, String field, String newInfo) {
         String query = "UPDATE Boss SET " + field + " = ? WHERE id = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -66,10 +89,15 @@ public class SQLiteCRUD {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            // Log the exception for tracking
         }
     }
 
-
+    /**
+     * Counts the number of Bosses in the database.
+     *
+     * @return The number of Bosses in the database.
+     */
     public int countBosses() {
         String query = "SELECT COUNT(*) FROM Boss";
         int result;
@@ -79,19 +107,26 @@ public class SQLiteCRUD {
 
             if (resultSet.next()) {
                 result = resultSet.getInt(1);
-                System.out.println("Count: "+result);
-                return result; // The result of COUNT(*) is in the first column
+                System.out.println("Count: " + result);
+                return result;
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
+            // Log the exception for tracking
         }
-        result=0;
-        System.out.println("Count: "+result);
-        return result; // Return 0 if an exception occurs or if no result is found
+
+        result = 0;
+        System.out.println("Count: " + result);
+        return result;
     }
 
 
+    /**
+     * Retrieves a list of all Bosses from the database.
+     *
+     * @return A List containing all Bosses in the database.
+     */
     public List<Boss> getAllBosses() {
         List<Boss> bossList = new ArrayList<>();
         try (Statement statement = connection.createStatement();
@@ -119,6 +154,9 @@ public class SQLiteCRUD {
     }
 
 
+    /**
+     * Deletes all Bosses from the database.
+     */
     public void deleteAllBosses() {
         String query = "DELETE FROM Boss";
 
@@ -128,11 +166,19 @@ public class SQLiteCRUD {
             System.out.println(rowsDeleted + " bosses deleted from the database.");
         } catch (SQLException e) {
             e.printStackTrace();
+            // Log the exception for tracking
         }
     }
 
 
-    public int findBoss(String field, String match){
+    /**
+     * Finds the ID of a Boss based on a specified field and match.
+     *
+     * @param field The field to search for.
+     * @param match The value to match in the specified field.
+     * @return The ID of the Boss if found, otherwise 0.
+     */
+    public int findBoss(String field, String match) {
         String query = "SELECT id FROM Boss WHERE " + field + " = ? LIMIT 1";
         int bossID = 0;
 
@@ -149,16 +195,66 @@ public class SQLiteCRUD {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            // Log the exception for tracking
         }
         return bossID;
     }
 
+
+    /**
+     * Displays the contents of the Boss table, including the row number.
+     */
+    public void displayBossTable() {
+        String countQuery = "SELECT COUNT(*) FROM Boss";
+        String selectQuery = "SELECT * FROM Boss";
+
+        try (Statement countStatement = connection.createStatement();
+             ResultSet countResultSet = countStatement.executeQuery(countQuery)) {
+
+            if (countResultSet.next()) {
+                int rowCount = countResultSet.getInt(1);
+                System.out.println("Number of records in Boss table: " + rowCount);
+
+                try (Statement selectStatement = connection.createStatement();
+                     ResultSet selectResultSet = selectStatement.executeQuery(selectQuery)) {
+
+                    int rowNumber = 0;
+                    while (selectResultSet.next()) {
+                        rowNumber++;
+                        System.out.println("\nRow " + rowNumber);
+                        System.out.println("Boss ID: " + selectResultSet.getInt("id"));
+                        System.out.println("Name: " + selectResultSet.getString("name"));
+                        System.out.println("Location: " + selectResultSet.getString("location"));
+                        System.out.println("HP: " + selectResultSet.getInt("hp"));
+                        System.out.println("Poise: " + selectResultSet.getDouble("poise"));
+                        System.out.println("Souls: " + selectResultSet.getInt("souls"));
+                        System.out.println("Drop Name: " + selectResultSet.getString("drop_name"));
+                        System.out.println("Description: " + selectResultSet.getString("description"));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Log or handle the exception as needed
+        }
+    }
+
+
+
+    /**
+     * Gets the current database connection.
+     *
+     * @return The current database connection.
+     */
     public Connection getConnection() {
         return connection;
     }
+    /**
+     * Sets the database connection.
+     *
+     * @param connection The database connection to set.
+     */
     public void setConnection(Connection connection) {
         this.connection = connection;
     }
-
-
 }

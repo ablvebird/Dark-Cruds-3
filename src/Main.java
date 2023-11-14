@@ -147,6 +147,9 @@ public class Main {
             //7)Update Boss with correct information
             sqLiteCRUD.updateBoss(lastBossID, "name", "Darkeater Midir");
 
+            //8)Show Boss table, printing Boss data and row number
+            sqLiteCRUD.displayBossTable();
+
         }
         catch (Exception e){e.printStackTrace();}
     }
