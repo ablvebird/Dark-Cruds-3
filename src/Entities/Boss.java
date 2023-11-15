@@ -1,9 +1,11 @@
 package Entities;
 
+import java.io.Serializable;
+
 /**
  * Represents a boss entity in Dark Souls 3
  */
-public class Boss {
+public class Boss implements Serializable {
 
     //Class attributes
     private int bossId;

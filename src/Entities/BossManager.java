@@ -1,6 +1,7 @@
 package Entities;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class BossManager {
@@ -20,8 +21,12 @@ public class BossManager {
         bL.add(b);
     }
 
-    public void showList(List<Boss> bL){
+    public static void showList(List<Boss> bL){
         for (Boss boss : bL){
+            showBoss(boss);
+        }
+    }
+    public static void showBoss(Boss boss){
             System.out.println("Boss ID: " + boss.getBossID());
             System.out.println("Boss Name: " + boss.getBossName());
             System.out.println("Location: " + boss.getLocation());
@@ -30,7 +35,6 @@ public class BossManager {
             System.out.println("Souls: " + boss.getSouls());
             System.out.println("Drop Name: " + boss.getDropName());
             System.out.println("Description: " + boss.getDescription());
-        }
     }
 
     public List<Boss> createBossList() {
@@ -49,4 +53,47 @@ public class BossManager {
 
         return newBossList;
     }
+
+    public List<Boss> modifyBoss(int bossID, String newName, String newLocation){
+        Boolean match = false;
+
+        for(Boss boss : bossList){
+            if (bossID == boss.getBossID()){
+                match=true;
+
+                System.out.println("Match found!");
+                System.out.println("Old Boss Name: "+boss.getBossName());
+                System.out.println("Old Boss Location "+boss.getLocation());
+
+                boss.setBossName(newName);
+                boss.setLocation(newLocation);
+
+                System.out.println("New Boss Data:");
+                System.out.println("Boss Name: "+boss.getBossName());
+                System.out.println("Boss Location: "+boss.getLocation());
+            }
+        }
+        if (!match){
+            System.out.println("Boss ID not found in list");
+        }
+        return bossList;
+    }
+
+    public void deleteBoss(int bossID){
+        Iterator<Boss> iterator = bossList.iterator();
+        Boolean match=false;
+        while (iterator.hasNext()) {
+            Boss boss = iterator.next();
+            if (bossID == boss.getBossID()) {
+                iterator.remove();
+                match=true;
+                System.out.println("Boss deleted successfully. ID: " + bossID);
+            }
+        }
+        if (!match){
+            System.out.println("No matches found for ID " + bossID);
+        }
+    }
+
+
 }

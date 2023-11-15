@@ -1,5 +1,6 @@
 import Entities.Boss;
 import Entities.BossManager;
+import FileManager.FileManager;
 import SQLite.SQLiteCRUD;
 import SQLite.SQLiteConnector;
 import XMLManagers.DomManager;
@@ -13,11 +14,43 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        FileTest();
         //DOMTest();
         //SAXTest();
         //JDOMTest();
         //XSLTTest();
-        SQLiteTest();
+        //SQLiteTest();
+    }
+
+    //FileManager
+    public static void FileTest(){
+        //General instancing
+        FileManager fileManager = new FileManager();
+        BossManager bossManager = new BossManager();
+        bossManager.setBossList(new JDomManager().readXML());
+
+        //Ej1: Receive file name from cmd and delete with all its contents
+        //1) Create files to delete
+        fileManager.createRecursively("directoryTesting", 2, 2);
+        fileManager.deleteFile("directoryTesting");
+
+        //Ej2: Create binary .dat file to store data from serialized object
+        fileManager.createDatFile(bossManager.getBossList(), "bosses.dat");
+
+        //Ej3: Modify data receiving ID and new info from cmd, then print old and new data.
+        List<Boss> newBossList = fileManager.readDatFile("bosses.dat");
+        bossManager.modifyBoss(3, "New Name", "New Location");
+        fileManager.createDatFile(newBossList, "updatedBosses.dat");
+
+
+        //Ej4: Eliminate a boss with ID from cmd
+        bossManager.deleteBoss(1);
+        bossManager.deleteBoss(2);
+        bossManager.deleteBoss(3);
+        fileManager.createDatFile(bossManager.getBossList(), "lessBosses.dat");
+
+        //Ej5: Copy a file in a location, both source and destination are introducen in cmd
+        fileManager.copyFileInLocation("bosses.dat", "src/copyOfBosses.dat");
 
     }
 
