@@ -19,7 +19,7 @@ public class Main {
         //SAXTest();
         //JDOMTest();
         //XSLTTest();
-        //SQLiteTest();
+        SQLiteTest();
     }
 
     //FileManager
@@ -35,29 +35,28 @@ public class Main {
         fileManager.deleteFile("directoryTesting");
 
         //Ej2: Create binary .dat file to store data from serialized object
-        fileManager.createDatFile(bossManager.getBossList(), "bosses.dat");
+        fileManager.createDatFile(bossManager.getBossList(), "resources/bosses.dat");
 
         //Ej3: Modify data receiving ID and new info from cmd, then print old and new data.
-        List<Boss> newBossList = fileManager.readDatFile("bosses.dat");
+        List<Boss> newBossList = fileManager.readDatFile("resources/bosses.dat");
         bossManager.modifyBoss(3, "New Name", "New Location");
-        fileManager.createDatFile(newBossList, "updatedBosses.dat");
+        fileManager.createDatFile(newBossList, "resources/updatedBosses.dat");
 
 
         //Ej4: Eliminate a boss with ID from cmd
         bossManager.deleteBoss(1);
         bossManager.deleteBoss(2);
         bossManager.deleteBoss(3);
-        fileManager.createDatFile(bossManager.getBossList(), "lessBosses.dat");
+        fileManager.createDatFile(bossManager.getBossList(), "resources/lessBosses.dat");
 
         //Ej5: Copy a file in a location, both source and destination are introducen in cmd
-        fileManager.copyFileInLocation("bosses.dat", "src/copyOfBosses.dat");
-
+        fileManager.copyFileInLocation("resources/bosses.dat", "resources/copyOfBosses.dat");
     }
 
     //DOM
     public static void DOMTest(){
         //1)Build DOM manager on selected XML
-        DomManager domManager = new DomManager("src/bosses.xml");
+        DomManager domManager = new DomManager("resources/bosses.xml");
 
         //2)Parsing
         domManager.parseXML();
@@ -83,7 +82,7 @@ public class Main {
     public static void SAXTest(){
         try {
             //1)Create a new XMLManagers.SaxManager instance with the path to your XML file
-            SaxManager saxManager = new SaxManager("src/bosses.xml");
+            SaxManager saxManager = new SaxManager("resources/bosses.xml");
 
             //2)Create a SAXParserFactory and obtain a SAXParser
             SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -115,7 +114,7 @@ public class Main {
         bossManager.showList(newBossList);
 
         //4)Generating new XML from list and printing
-        String fileName="newTestBosses";
+        String fileName="resources/newTestBosses";
         jDomManager.generateXML(newBossList, fileName);
         jDomManager.printXML(fileName);
 
@@ -127,9 +126,9 @@ public class Main {
     public static void XSLTTest(){
         try{
             //1)Resource linking
-            String xmlPath = "src/bosses.xml";
-            String xslPath = "src/bosses.xsl";
-            String htmlPath = "bossesTransformed.html";
+            String xmlPath = "resources/bosses.xml";
+            String xslPath = "resources/bosses.xsl";
+            String htmlPath = "resources/bossesTransformed.html";
 
             //2)Transforming
             XMLTransformer.toHTML(xmlPath, xslPath, htmlPath);
@@ -192,5 +191,4 @@ public class Main {
         }
         catch (Exception e){e.printStackTrace();}
     }
-
 }

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JDomManager {
-    private static final String FILENAME = "src/bosses.xml";
+    private static final String FILENAME = "resources/bosses.xml";
 
     /**
      * Reads and prints XML data related to boss entities from the specified XML file.

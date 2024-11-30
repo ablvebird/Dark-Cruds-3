@@ -1,6 +1,6 @@
 # 🛠️ Dark Cruds 3 - Gestión de Datos XML en Java
 
-![Dark Souls 3 Banner](DALL·E%202024-11-29%2017.42.05.webp)
+![Dark Souls 3 Banner](resources/DALL·E%202024-11-29%2017.42.05.webp)
 _(thanks Dall-E :P)_
 
 ## 📜 Resumen

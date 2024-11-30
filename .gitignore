@@ -32,6 +32,6 @@ bin/
 /src/copyOfBosses.dat
 /lessBosses.dat
 /updatedBosses.dat
-/bosses_by_bossId.xml
+/resources/bosses_by_bossId.xml
 /bossesTransformed.html
 /newTestBosses.xml

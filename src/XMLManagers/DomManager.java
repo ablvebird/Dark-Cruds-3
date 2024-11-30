@@ -169,7 +169,7 @@ public class DomManager {
             }
         }
 
-        String newFilePath = "bosses_by_" + category + ".xml";
+        String newFilePath = "resources/bosses_by_" + category + ".xml";
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
         DOMSource source = new DOMSource(newDoc);
