@@ -19,7 +19,7 @@ public class Main {
         //SAXTest();
         //JDOMTest();
         //XSLTTest();
-        SQLiteTest();
+        //SQLiteTest();
     }
 
     //FileManager
