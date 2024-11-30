@@ -1,19 +1,20 @@
+// Importaciones necesarias para el proyecto
 import Entities.Boss;
 import Entities.BossManager;
-import FileManager.FileManager;
 import SQLite.SQLiteCRUD;
 import SQLite.SQLiteConnector;
 import XMLManagers.DomManager;
 import XMLManagers.JDomManager;
 import XMLManagers.SaxManager;
 import XMLManagers.XMLTransformer;
-
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.util.List;
+import FileManager.*;
 
 public class Main {
     public static void main(String[] args) {
+        // Bloques de ejercicios - Descomenta el que quieras probar
         //FileTest();
         //DOMTest();
         //SAXTest();
@@ -22,115 +23,108 @@ public class Main {
         //SQLiteTest();
     }
 
-    //FileManager
+    // Pruebas del gestor de archivos
     public static void FileTest(){
-        //General instancing
+        // Creamos las instancias necesarias para trabajar con archivos
         FileManager fileManager = new FileManager();
         BossManager bossManager = new BossManager();
         bossManager.setBossList(new JDomManager().readXML());
 
-        //Ej1: Receive file name from cmd and delete with all its contents
-        //1) Create files to delete
+        // Ejercicio 1: Crear y borrar directorios
+        // Primero creamos una estructura de directorios para probar
         fileManager.createRecursively("directoryTesting", 2, 2);
         fileManager.deleteFile("directoryTesting");
 
-        //Ej2: Create binary .dat file to store data from serialized object
+        // Ejercicio 2: Crear archivo binario con datos de jefes
         fileManager.createDatFile(bossManager.getBossList(), "resources/bosses.dat");
 
-        //Ej3: Modify data receiving ID and new info from cmd, then print old and new data.
+        // Ejercicio 3: Modificar datos de un jefe y guardar cambios
         List<Boss> newBossList = fileManager.readDatFile("resources/bosses.dat");
         bossManager.modifyBoss(3, "New Name", "New Location");
         fileManager.createDatFile(newBossList, "resources/updatedBosses.dat");
 
-
-        //Ej4: Eliminate a boss with ID from cmd
+        // Ejercicio 4: Eliminar varios jefes por ID
         bossManager.deleteBoss(1);
         bossManager.deleteBoss(2);
         bossManager.deleteBoss(3);
         fileManager.createDatFile(bossManager.getBossList(), "resources/lessBosses.dat");
 
-        //Ej5: Copy a file in a location, both source and destination are introducen in cmd
+        // Ejercicio 5: Copiar un archivo a otra ubicación
         fileManager.copyFileInLocation("resources/bosses.dat", "resources/copyOfBosses.dat");
     }
 
-    //DOM
+    // Pruebas de DOM (Document Object Model)
     public static void DOMTest(){
-        //1)Build DOM manager on selected XML
+        // Crear gestor DOM y apuntarlo al archivo XML de jefes
         DomManager domManager = new DomManager("resources/bosses.xml");
 
-        //2)Parsing
+        // Procesar el archivo XML
         domManager.parseXML();
 
-        //3)Simple query: logs number of bosses
+        // Mostrar número total de jefes en el XML
         System.out.println("Number of bosses: "+domManager.getNumBosses());
 
-        //4)Printing XML in console
+        // Mostrar información detallada de cada jefe
         domManager.printBossData();
 
-        //5)Printing XML of unknown structure
+        // Leer XML sin conocer su estructura previamente
         domManager.readUnknownXML();
 
-        //6)Creating XML from DOM using category constraints
+        // Crear nuevo XML filtrando por ID de jefe = 3
         try {
             domManager.newXML("bossId","3");
         }
         catch (Exception e){e.printStackTrace();}
     }
 
-
-    //SAX
+    // Pruebas de SAX (Simple API for XML)
     public static void SAXTest(){
         try {
-            //1)Create a new XMLManagers.SaxManager instance with the path to your XML file
+            // Crear gestor SAX para nuestro archivo XML
             SaxManager saxManager = new SaxManager("resources/bosses.xml");
 
-            //2)Create a SAXParserFactory and obtain a SAXParser
+            // Preparar el parser SAX
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
 
-            //3)Parse the XML file using your XMLManagers.SaxManager as the handler
+            // Procesar el archivo XML usando nuestro gestor
             saxParser.parse(saxManager.getFile(), saxManager);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
-    //JDOM
+    // Pruebas de JDOM (Java DOM - alternativa más fácil a DOM)
     public static void JDOMTest(){
-
-        //1)Instancing managers
+        // Crear gestores necesarios
         BossManager bossManager = new BossManager();
         JDomManager jDomManager = new JDomManager();
 
-        //2)Setting Boss List from XML and iterating elements
+        // Cargar lista de jefes desde XML y mostrarla
         bossManager.setBossList(jDomManager.readXML());
         System.out.println("List size: "+bossManager.getBossList().size());
         bossManager.showList(bossManager.getBossList());
 
-        //3)Creating new Boss List from XML, generating and printing
+        // Crear nueva lista de jefes y mostrarla
         List<Boss> newBossList=bossManager.createBossList();
         System.out.println("List size: "+newBossList.size());
         bossManager.showList(newBossList);
 
-        //4)Generating new XML from list and printing
+        // Generar nuevo archivo XML con la lista nueva
         String fileName="resources/newTestBosses";
         jDomManager.generateXML(newBossList, fileName);
-        jDomManager.printXML(fileName);
-
         jDomManager.printXML(jDomManager.getFilename());
     }
 
-
-    //XSLT
+    // Pruebas de XSLT (transformación de XML a HTML)
     public static void XSLTTest(){
         try{
-            //1)Resource linking
+            // Definir rutas de los archivos
             String xmlPath = "resources/bosses.xml";
             String xslPath = "resources/bosses.xsl";
             String htmlPath = "resources/bossesTransformed.html";
 
-            //2)Transforming
+            // Transformar XML a HTML
             XMLTransformer.toHTML(xmlPath, xslPath, htmlPath);
         }
         catch(Exception e){
@@ -138,56 +132,50 @@ public class Main {
         }
     }
 
-
-    //SQLite
+    // Pruebas de base de datos SQLite
     public static void SQLiteTest(){
-        //Setting boss list:
+        // Preparar datos iniciales desde XML
         BossManager bossManager = new BossManager();
         JDomManager jDomManager = new JDomManager();
         bossManager.setBossList(jDomManager.readXML());
         List<Boss> bossList=bossManager.getBossList();
 
-        //Initializing SQLite CRUD
+        // Crear gestor de base de datos
         SQLiteCRUD sqLiteCRUD = new SQLiteCRUD();
 
         try{
-            //1)Connection
+            // Conectar a la base de datos
             sqLiteCRUD.setConnection(SQLiteConnector.connect());
 
-            //2)Boss count testing
+            // Probar contador de jefes e insertar uno nuevo
             sqLiteCRUD.countBosses();
             sqLiteCRUD.insertBoss(bossList.get(1));
             System.out.println("Boss added: "+bossList.get(1).getBossName());
             sqLiteCRUD.countBosses();
 
-            //3)Clean Database
+            // Limpiar base de datos
             sqLiteCRUD.deleteAllBosses();
 
-            //4)Add bosses from list
+            // Insertar todos los jefes de la lista
             for (Boss boss : bossList){
                 sqLiteCRUD.insertBoss(boss);
                 System.out.println("Boss added: "+boss.getBossName());
             }
 
-            //5)Insert New Boss
+            // Insertar un nuevo jefe personalizado
             Boss newBoss = new Boss("Darkeater Miguel", "The Ringed City", 15860, 500, 150000, "Soul of Darkeater Midir", "Midir, descendant of Archdragons, was raised by the gods, and owing to his immortality was given a duty to eternally battle the dark, a duty that he would never forget, even after the gods perished.");
             sqLiteCRUD.insertBoss(newBoss);
 
-            //6)Find boss by Name
+            // Buscar el jefe por nombre
             int lastBossID = sqLiteCRUD.findBoss("name", "Darkeater Miguel");
 
-            //7)Update Boss with correct information
+            // Actualizar el nombre del jefe
             sqLiteCRUD.updateBoss(lastBossID, "name", "Darkeater Midir");
 
-            //8)Show Boss table, printing Boss data and row number
+            // Mostrar información de la base de datos
             sqLiteCRUD.displayBossTable();
-
-            //9)Show Boss table metadata
             sqLiteCRUD.displayColumnMetadata();
-
-            //10)Display DB info
             sqLiteCRUD.displayDatabaseInfo();
-
         }
         catch (Exception e){e.printStackTrace();}
     }

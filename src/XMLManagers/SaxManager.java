@@ -7,45 +7,47 @@ import javax.xml.parsers.SAXParser;
 import java.io.File;
 
 /**
- * A SAX (Simple API for XML) manager for parsing XML data related to boss entities.
+ * Gestor que utiliza SAX (Simple API for XML) para procesar archivos XML.
+ * SAX lee el XML secuencialmente y es más eficiente en memoria que DOM.
  */
 public class SaxManager extends DefaultHandler {
 
     private final File file;
     private SAXParser parser;
 
-    //Booleans to track element states
-    boolean bBoss = false;
-    boolean bBossId = false;
-    boolean bBossName = false;
-    boolean bLocation = false;
-    boolean bHP = false;
-    boolean bPoise = false;
-    boolean bSouls = false;
-    boolean bDropName = false;
-    boolean bDescription = false;
+    // Banderas para rastrear en qué elemento estamos durante la lectura
+    boolean bBoss = false;        // Dentro de un elemento boss
+    boolean bBossId = false;      // En el ID del jefe
+    boolean bBossName = false;    // En el nombre del jefe
+    boolean bLocation = false;    // En la ubicación
+    boolean bHP = false;          // En los puntos de vida
+    boolean bPoise = false;       // En el equilibrio
+    boolean bSouls = false;       // En las almas
+    boolean bDropName = false;    // En el nombre del objeto
+    boolean bDescription = false; // En la descripción
 
     /**
-     * Constructs a SaxManager with the specified XML file path.
+     * Constructor del gestor SAX.
      *
-     * @param filePath The path to the XML file to be parsed.
+     * @param filePath Ruta del archivo XML a procesar
      */
     public SaxManager(String filePath) {
         this.file = new File(filePath);
     }
 
     @Override
-    //1)Start of element
+    // Se llama al encontrar el inicio de un elemento XML
     public void startElement(String uri, String localName,
-                             String qName, Attributes attributes)
-            throws SAXException {
+                             String qName, Attributes attributes) {
 
+        // Si encontramos un jefe, guardamos su ID y marcamos que estamos dentro
         if (qName.equalsIgnoreCase("boss")) {
             String bossId = attributes.getValue("bossId");
-            System.out.println("Entities.Boss ID : " + bossId);
+            System.out.println("ID del jefe: " + bossId);
             bBoss = true;
         } else if (bBoss) {
-            //2)Inside a <boss> element, set booleans based on element names
+            // Si estamos dentro de un jefe, activar la bandera correspondiente
+            // según el elemento que encontremos
             if (qName.equalsIgnoreCase("bossId")) {
                 bBossId = true;
             } else if (qName.equalsIgnoreCase("bossName")) {
@@ -67,50 +69,47 @@ public class SaxManager extends DefaultHandler {
     }
 
     @Override
-    //3)End of element
-    public void endElement(String uri, String localName, String qName)
-            throws SAXException {
+    // Se llama al encontrar el final de un elemento XML
+    public void endElement(String uri, String localName, String qName) {
         if (qName.equalsIgnoreCase("boss")) {
-            System.out.println("End Element :" + qName);
+            System.out.println("Fin del jefe: " + qName);
         }
     }
 
     @Override
-    //4)Characters between XML tags
-    public void characters(char[] ch, int start, int length) throws SAXException {
+    // Se llama al encontrar texto entre las etiquetas XML
+    public void characters(char[] ch, int start, int length) {
+        // Según la bandera activa, mostramos el contenido correspondiente
         if (bBossName) {
-            System.out.println("Name: " + new String(ch, start, length));
+            System.out.println("Nombre: " + new String(ch, start, length));
             bBossName = false;
         } else if (bLocation) {
-            System.out.println("Location: " + new String(ch, start, length));
+            System.out.println("Ubicación: " + new String(ch, start, length));
             bLocation = false;
         } else if (bHP) {
-            System.out.println("Hit Points: " + new String(ch, start, length));
+            System.out.println("Puntos de vida: " + new String(ch, start, length));
             bHP = false;
         } else if (bPoise) {
-            System.out.println("Poise: " + new String(ch, start, length));
+            System.out.println("Equilibrio: " + new String(ch, start, length));
             bPoise = false;
         } else if (bSouls) {
-            System.out.println("Souls: " + new String(ch, start, length));
+            System.out.println("Almas: " + new String(ch, start, length));
             bSouls = false;
         } else if (bDropName) {
-            System.out.println("Item dropped: " + new String(ch, start, length));
+            System.out.println("Objeto que deja: " + new String(ch, start, length));
             bDropName = false;
         } else if (bDescription) {
-            System.out.println("Item description: " + new String(ch, start, length));
+            System.out.println("Descripción del objeto: " + new String(ch, start, length));
             bDescription = false;
         }
     }
 
-
     /**
-     * Get the XML file associated with this manager.
+     * Obtiene el archivo XML asociado a este gestor.
      *
-     * @return The XML file being processed by this manager.
+     * @return El archivo XML que está siendo procesado
      */
     public File getFile() {
         return this.file;
     }
-
-
 }

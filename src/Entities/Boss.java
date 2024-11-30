@@ -3,27 +3,27 @@ package Entities;
 import java.io.Serializable;
 
 /**
- * Represents a boss entity in Dark Souls 3
+ * Clase que representa un jefe (boss) del juego Dark Souls 3
+ * Implementa Serializable para poder guardar los objetos en archivos
  */
 public class Boss implements Serializable {
 
-    //Class attributes
-    private int bossId;
-    private String bossName;
-    private String location;
-    private int HP;
-    private double Poise;
-    private int Souls;
-    private String dropName;
-    private String description;
+    // Atributos que definen a un jefe
+    private int bossId;          // Identificador único del jefe
+    private String bossName;     // Nombre del jefe
+    private String location;     // Ubicación donde se encuentra
+    private int HP;             // Puntos de vida
+    private double Poise;       // Equilibrio (determina si puede ser interrumpido)
+    private int Souls;          // Almas que otorga al ser derrotado
+    private String dropName;    // Nombre del objeto que deja al morir
+    private String description; // Descripción del objeto que deja
 
-    //Empty constructor
+    // Constructor vacío - necesario para algunas operaciones
     public Boss(){}
 
-    //Complete constructor
+    // Constructor con todos los atributos - usado para crear jefes completos
     public Boss(int bossId, String bossName, String location, int HP, double Poise,
                 int Souls, String dropName, String description){
-
         this.bossId = bossId;
         this.bossName = bossName;
         this.location = location;
@@ -34,10 +34,9 @@ public class Boss implements Serializable {
         this.description = description;
     }
 
-    //DB Constructor
+    // Constructor sin ID - usado para base de datos donde el ID se genera automáticamente
     public Boss(String bossName, String location, int HP, double Poise,
                 int Souls, String dropName, String description){
-
         this.bossName = bossName;
         this.location = location;
         this.HP = HP;
@@ -47,15 +46,17 @@ public class Boss implements Serializable {
         this.description = description;
     }
 
-//GETTERS AND SETTERS
+    // Métodos para obtener y modificar los atributos (getters y setters)
 
-    // Getter and Setter for bossID
+    // ID del jefe
     public int getBossID() {
         return bossId;
     }
-    public void setBossID(int bossID) { this.bossId = bossID; }
+    public void setBossID(int bossID) {
+        this.bossId = bossID;
+    }
 
-    // Getter and Setter for bossName
+    // Nombre del jefe
     public String getBossName() {
         return bossName;
     }
@@ -63,7 +64,7 @@ public class Boss implements Serializable {
         this.bossName = bossName;
     }
 
-    // Getter and Setter for HP
+    // Puntos de vida
     public int getHP() {
         return HP;
     }
@@ -71,7 +72,7 @@ public class Boss implements Serializable {
         this.HP = HP;
     }
 
-    //Getter and Setter for Location
+    // Ubicación del jefe
     public String getLocation() {
         return location;
     }
@@ -79,7 +80,7 @@ public class Boss implements Serializable {
         this.location = location;
     }
 
-    // Getter and Setter for Poise
+    // Equilibrio
     public double getPoise() {
         return Poise;
     }
@@ -87,7 +88,7 @@ public class Boss implements Serializable {
         this.Poise = Poise;
     }
 
-    // Getter and Setter for Souls
+    // Almas que otorga
     public int getSouls() {
         return Souls;
     }
@@ -95,7 +96,7 @@ public class Boss implements Serializable {
         this.Souls = Souls;
     }
 
-    // Getter and Setter for dropName
+    // Nombre del objeto que deja
     public String getDropName() {
         return dropName;
     }
@@ -103,12 +104,11 @@ public class Boss implements Serializable {
         this.dropName = dropName;
     }
 
-    // Getter and Setter for description
+    // Descripción del objeto
     public String getDescription() {
         return description;
     }
     public void setDescription(String description) {
         this.description = description;
     }
-
 }

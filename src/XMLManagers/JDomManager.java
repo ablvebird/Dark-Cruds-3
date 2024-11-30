@@ -11,26 +11,37 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase para gestionar archivos XML usando la librería JDOM.
+ * JDOM es una alternativa más sencilla a DOM para trabajar con XML en Java.
+ */
 public class JDomManager {
+    // Ruta del archivo XML principal de jefes
     private static final String FILENAME = "resources/bosses.xml";
 
     /**
-     * Reads and prints XML data related to boss entities from the specified XML file.
+     * Lee el archivo XML y convierte los datos en una lista de jefes.
+     *
+     * @return Lista de objetos Boss con la información del XML
      */
     public List<Boss> readXML() {
         List<Boss> bossList = new ArrayList<>();
         try {
+            // Configurar el constructor SAX con medidas de seguridad
             SAXBuilder sB = new SAXBuilder();
             sB.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
             sB.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 
+            // Leer el archivo XML y obtener su estructura
             Document doc = sB.build(new File(FILENAME));
             Element rootNode = doc.getRootElement();
             List<Element> elementBossList = rootNode.getChildren("boss");
 
+            // Procesar cada jefe encontrado en el XML
             for (Element bossElement : elementBossList) {
                 Boss boss = new Boss();
 
+                // Obtener y establecer los datos básicos del jefe
                 String bossId = bossElement.getAttributeValue("bossId");
                 boss.setBossID(Integer.parseInt(bossId));
                 String bossName = bossElement.getChildText("bossName");
@@ -38,12 +49,9 @@ public class JDomManager {
                 String location = bossElement.getChildText("location");
                 boss.setLocation(location);
 
-                //Access Stats elements
+                // Obtener las estadísticas del jefe
                 Element statsElement = bossElement.getChild("stats");
-
-
                 if (statsElement != null) {
-                    // Access the individual stats
                     String HP = statsElement.getChildText("HP");
                     String Poise = statsElement.getChildText("Poise");
                     String Souls = statsElement.getChildText("Souls");
@@ -53,10 +61,9 @@ public class JDomManager {
                     boss.setSouls(Integer.parseInt(Souls));
                 }
 
-                //Access Drop elements
+                // Obtener información del objeto que deja el jefe
                 Element dropElement = bossElement.getChild("drop");
                 if (dropElement != null) {
-                    // Access the individual drop details
                     String dropName = dropElement.getChildText("dropName");
                     String description = dropElement.getChildText("description");
 
@@ -73,26 +80,27 @@ public class JDomManager {
     }
 
     /**
-     * Reads and prints XML data related to boss entities from the specified XML file.
+     * Lee y muestra en pantalla la información de los jefes desde un archivo XML.
      *
-     * @param fileName The path to the XML file to be read.
+     * @param fileName Ruta del archivo XML a leer
      */
     public void printXML(String fileName) {
         try {
-            //1)Create a SAXBuilder and prevent XXE (XML External Entity) attacks
+            // Configurar el constructor SAX de forma segura
             SAXBuilder sB = new SAXBuilder();
             sB.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
             sB.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 
-            //2)Set up file and list resources for receiving xml data
+            // Preparar el documento XML para su lectura
             Document doc = sB.build(new File(fileName));
             Element rootNode = doc.getRootElement();
             List<Element> elementBossList = rootNode.getChildren("boss");
 
-            //3)Gets and prints a list of attributes for each boss entity
+            // Mostrar información de cada jefe
             for (Element bossElement : elementBossList) {
                 Boss boss = new Boss();
 
+                // Leer datos básicos
                 String bossId = bossElement.getAttributeValue("bossId");
                 boss.setBossID(Integer.parseInt(bossId));
                 String bossName = bossElement.getChildText("bossName");
@@ -100,7 +108,7 @@ public class JDomManager {
                 String location = bossElement.getChildText("location");
                 boss.setLocation(location);
 
-                // Navigate to the <stats> element
+                // Leer estadísticas
                 Element statsElement = bossElement.getChild("stats");
                 if (statsElement != null) {
                     String HP = statsElement.getChildText("HP");
@@ -111,7 +119,7 @@ public class JDomManager {
                     boss.setSouls(Integer.parseInt(Souls));
                 }
 
-                // Navigate to the <drop> element
+                // Leer información del objeto que deja
                 Element dropElement = bossElement.getChild("drop");
                 if (dropElement != null) {
                     String dropName = dropElement.getChildText("dropName");
@@ -120,40 +128,40 @@ public class JDomManager {
                     boss.setDescription(description);
                 }
 
-                System.out.println("Boss ID: " + boss.getBossID());
-                System.out.println("Boss Name: " + boss.getBossName());
-                System.out.println("Location: " + boss.getLocation());
-                System.out.println("HP: " + boss.getHP());
-                System.out.println("Poise: " + boss.getPoise());
-                System.out.println("Souls: " + boss.getSouls());
-                System.out.println("Drop Name: " + boss.getDropName());
-                System.out.println("Description: " + boss.getDescription());
+                // Mostrar toda la información del jefe
+                System.out.println("ID del jefe: " + boss.getBossID());
+                System.out.println("Nombre: " + boss.getBossName());
+                System.out.println("Ubicación: " + boss.getLocation());
+                System.out.println("Vida: " + boss.getHP());
+                System.out.println("Equilibrio: " + boss.getPoise());
+                System.out.println("Almas: " + boss.getSouls());
+                System.out.println("Objeto: " + boss.getDropName());
+                System.out.println("Descripción: " + boss.getDescription());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
-
     /**
-     * Generates a new XML file with data from a provided list of Boss objects.
+     * Genera un nuevo archivo XML con la información de una lista de jefes.
      *
-     * @param bossList The list of Boss objects to be included in the XML file.
+     * @param bossList Lista de jefes a incluir en el XML
+     * @param fileName Nombre del archivo XML a crear (sin extensión)
      */
     public void generateXML(List<Boss> bossList, String fileName) {
         try {
-            //1)Root element for the XML document
+            // Crear elemento raíz del documento
             Element bossesElement = new Element("bosses");
             Document doc = new Document(bossesElement);
 
-            //2)Create boss elements for each Boss object in the list
+            // Añadir cada jefe como un elemento del XML
             for (Boss boss : bossList) {
                 Element bossElement = createBossElement(boss);
                 bossesElement.addContent(bossElement);
             }
 
-            //3)Create the XML file with formatted output
+            // Guardar el documento con formato bonito
             XMLOutputter xml = new XMLOutputter();
             xml.setFormat(Format.getPrettyFormat());
             xml.output(doc, new FileWriter(fileName+".xml"));
@@ -161,11 +169,12 @@ public class JDomManager {
             e.printStackTrace();
         }
     }
+
     /**
-     * Creates a JDOM Element for a Boss object and populates it with attributes.
+     * Crea un elemento XML con la información de un jefe.
      *
-     * @param boss The Boss object for which to create an XML element.
-     * @return A JDOM Element representing the Boss object with attributes.
+     * @param boss Jefe del que crear el elemento XML
+     * @return Elemento XML con todos los datos del jefe
      */
     private Element createBossElement(Boss boss) {
         Element bossElement = new Element("boss");
@@ -179,12 +188,13 @@ public class JDomManager {
         bossElement.addContent(createElementWithText("description", boss.getDescription()));
         return bossElement;
     }
+
     /**
-     * Creates a JDOM Element with text content.
+     * Crea un elemento XML simple con texto.
      *
-     * @param elementName The name of the XML element.
-     * @param text       The text content to be added to the element.
-     * @return A JDOM Element with the specified text content.
+     * @param elementName Nombre del elemento
+     * @param text Texto a incluir en el elemento
+     * @return Elemento XML con el texto especificado
      */
     private Element createElementWithText(String elementName, String text) {
         Element element = new Element(elementName);
@@ -192,8 +202,9 @@ public class JDomManager {
         return element;
     }
 
-
-    //FILENAME Getter
+    /**
+     * Obtiene la ruta del archivo XML principal.
+     */
     public String getFilename(){
         return FILENAME;
     }

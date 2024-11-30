@@ -12,123 +12,114 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 
 /**
- * The DomManager class provides methods for parsing, analyzing, and manipulating XML documents using DOM (Document Object Model).
- * It can extract information from XML files, print detailed data about bosses, read unknown XML structures,
- * and create new XML documents based on category and constraint criteria.
+ * Clase que gestiona documentos XML usando DOM (Document Object Model).
+ * Permite leer archivos XML, extraer información sobre jefes,
+ * leer estructuras XML desconocidas y crear nuevos documentos XML
+ * según criterios específicos.
  */
 public class DomManager {
     private final File file;
     private Document doc;
     private Element eElement;
 
-
     /**
-     * Constructs a DomManager with the specified XML file path.
+     * Constructor que inicializa el gestor DOM con la ruta del archivo XML.
      *
-     * @param filePath The path to the XML file to be managed.
+     * @param filePath Ruta del archivo XML a gestionar
      */
     public DomManager(String filePath) {
         this.file = new File(filePath);
     }
 
-
     /**
-     * Parses the XML document, making it ready for further processing.
+     * Prepara el documento XML para su procesamiento.
      */
     public void parseXML() {
-        System.out.println("Executing DomManager.parseXML");
+        System.out.println("Ejecutando DomManager.parseXML");
         try {
-            //1) Create a new DocumentBuilderFactory
+            // Crear la fábrica de constructores de documentos
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 
-            //2) Create a new DocumentBuilder
+            // Crear el constructor de documentos
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 
-            //3) Parse the XML file and store the resulting Document in the 'doc' member variable
+            // Procesar el archivo XML y guardarlo en la variable doc
             this.doc = dBuilder.parse(file);
 
-            //4) Normalize the XML document to ensure consistent structure
+            // Normalizar el documento para asegurar una estructura consistente
             doc.getDocumentElement().normalize();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
     /**
-     * Retrieves and prints the number of bosses in the XML document.
+     * Cuenta y muestra el número de jefes en el documento XML.
      *
-     * @return The number of bosses in the XML document.
+     * @return Número total de jefes
      */
     public int getNumBosses() {
-        System.out.println("Executing DomManager.getNumBosses");
+        System.out.println("Ejecutando DomManager.getNumBosses");
         NodeList nList = doc.getElementsByTagName("boss");
-        System.out.println("Number of bosses: " + nList.getLength());
+        System.out.println("Número de jefes: " + nList.getLength());
         return nList.getLength();
     }
 
-
     /**
-     * Prints detailed information about each boss in the XML document.
+     * Muestra información detallada de cada jefe en el XML.
      */
     public void printBossData() {
-        System.out.println("Executing DomManager.printBossData");
-        //1)Retrieve a NodeList containing all "boss" elements from the XML document
+        System.out.println("Ejecutando DomManager.printBossData");
+        // Obtener lista de todos los elementos "boss"
         NodeList nList = doc.getElementsByTagName("boss");
 
-        //2)Iterate through the "boss" elements
+        // Recorrer la lista de jefes
         for (int index = 0; index < nList.getLength(); index++) {
-            //3) Get the current "boss" element
+            // Obtener el jefe actual
             Node nNode = nList.item(index);
 
-            //4) Check if the current node is an ELEMENT_NODE
+            // Comprobar si es un elemento válido
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                // Cast the current node to an Element
+                // Convertir el nodo a Element para acceder a sus datos
                 eElement = (Element) nNode;
 
-                //5)Print the attributes and text content for each boss
-                System.out.println("Entities.Boss id: " + eElement.getAttribute("bossId"));
-                System.out.println("Name: " + eElement.getElementsByTagName("bossName").item(0).getTextContent());
-                System.out.println("Location: " + eElement.getElementsByTagName("location").item(0).getTextContent());
-                System.out.println("Hit Points: " + eElement.getElementsByTagName("HP").item(0).getTextContent());
-                System.out.println("Poise: " + eElement.getElementsByTagName("Poise").item(0).getTextContent());
-                System.out.println("Souls: " + eElement.getElementsByTagName("Souls").item(0).getTextContent());
-                System.out.println("Item dropped: " + eElement.getElementsByTagName("dropName").item(0).getTextContent());
-                System.out.println("Item description: " + eElement.getElementsByTagName("description").item(0).getTextContent() + "\n");
+                // Mostrar todos los atributos del jefe
+                System.out.println("ID del jefe: " + eElement.getAttribute("bossId"));
+                System.out.println("Nombre: " + eElement.getElementsByTagName("bossName").item(0).getTextContent());
+                System.out.println("Ubicación: " + eElement.getElementsByTagName("location").item(0).getTextContent());
+                System.out.println("Puntos de vida: " + eElement.getElementsByTagName("HP").item(0).getTextContent());
+                System.out.println("Equilibrio: " + eElement.getElementsByTagName("Poise").item(0).getTextContent());
+                System.out.println("Almas: " + eElement.getElementsByTagName("Souls").item(0).getTextContent());
+                System.out.println("Objeto que deja: " + eElement.getElementsByTagName("dropName").item(0).getTextContent());
+                System.out.println("Descripción del objeto: " + eElement.getElementsByTagName("description").item(0).getTextContent() + "\n");
             }
         }
     }
 
-
     /**
-     * Reads and prints the content of all child elements without knowing the structure.
+     * Lee y muestra el contenido de todos los elementos sin conocer su estructura.
+     * Útil para explorar XMLs nuevos o desconocidos.
      */
     public void readUnknownXML() {
-        System.out.println("Executing DomManager.readUnknownXML");
-        //1)Retrieve a NodeList containing all "boss" elements from the XML document
+        System.out.println("Ejecutando DomManager.readUnknownXML");
+        // Obtener todos los elementos "boss"
         NodeList nList = doc.getElementsByTagName("boss");
 
-        //2)Iterate through the "boss" elements
+        // Recorrer cada jefe
         for (int index = 0; index < nList.getLength(); index++) {
-            // Get the current "boss" element
             Node nNode = nList.item(index);
 
-            //3)Check if the current node is an ELEMENT_NODE
+            // Verificar que es un elemento válido
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                // Cast the current node to an Element
                 Element eElement = (Element) nNode;
 
-                //4)Check if the current "boss" element has child nodes
+                // Si el elemento tiene hijos, mostrarlos
                 if (eElement.hasChildNodes()) {
-                    // Get a NodeList of child nodes for the current "boss" element
                     NodeList nl = nNode.getChildNodes();
 
-                    //5)Iterate through the child nodes
+                    // Recorrer y mostrar cada hijo
                     for (int index2 = 0; index2 < nl.getLength(); index2++) {
-                        // Get the current child node
                         Node childNode = nl.item(index2);
-
-                        //6)Print the text content of the child node
                         System.out.println(childNode.getTextContent());
                     }
                 }
@@ -136,32 +127,34 @@ public class DomManager {
         }
     }
 
-
     /**
-     * Creates a new XML document containing bosses whose attribute matches the specified category and constraint.
+     * Crea un nuevo XML que contiene solo los jefes que coinciden con ciertos criterios.
      *
-     * @param category    The category by which to filter bosses.
-     * @param constraint  The constraint to match against the specified category.
-     * @throws Exception if an error occurs during document creation or transformation.
+     * @param category    Categoría por la que filtrar (ejemplo: "bossId")
+     * @param constraint  Valor que debe tener esa categoría
+     * @throws Exception si hay problemas al crear o transformar el documento
      */
     public void newXML(String category, String constraint) throws Exception {
-        System.out.println("Executing DomManager.newXML");
+        System.out.println("Ejecutando DomManager.newXML");
+        // Preparar el nuevo documento
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document newDoc = dBuilder.newDocument();
 
+        // Crear el elemento raíz
         Element rootElement = newDoc.createElement("bosses");
         newDoc.appendChild(rootElement);
 
+        // Buscar jefes que cumplan el criterio
         NodeList nList = doc.getElementsByTagName("boss");
         for (int index = 0; index < nList.getLength(); index++) {
             Node nNode = nList.item(index);
 
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) nNode;
-
                 String bossAttribute = eElement.getAttribute(category);
 
+                // Si coincide, añadirlo al nuevo documento
                 if (bossAttribute.equals(constraint)) {
                     Node importedNode = newDoc.importNode(eElement, true);
                     rootElement.appendChild(importedNode);
@@ -169,6 +162,7 @@ public class DomManager {
             }
         }
 
+        // Guardar el nuevo documento
         String newFilePath = "resources/bosses_by_" + category + ".xml";
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();

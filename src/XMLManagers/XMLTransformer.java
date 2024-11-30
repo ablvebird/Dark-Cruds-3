@@ -10,36 +10,37 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * The XMLTransformer class provides a method to transform an XML document using an XSLT stylesheet
- * and generate an HTML document as output.
+ * Clase que permite transformar documentos XML a HTML usando hojas de estilo XSLT.
+ * XSLT (eXtensible Stylesheet Language Transformations) es un lenguaje que define
+ * cómo debe transformarse un XML a otros formatos como HTML.
  */
 public class XMLTransformer {
 
     /**
-     * Transforms an XML document to HTML using the provided XSLT stylesheet.
+     * Transforma un documento XML a HTML utilizando una hoja de estilo XSLT.
      *
-     * @param xmlPath  The path to the source XML document.
-     * @param xslPath  The path to the XSLT stylesheet for transformation.
-     * @param htmlPath The path where the resulting HTML document will be saved.
-     * @throws TransformerException If any errors occur during the transformation process.
-     * @throws IOException         If there are any input/output related errors.
+     * @param xmlPath  Ruta del archivo XML original
+     * @param xslPath  Ruta de la hoja de estilo XSLT que define la transformación
+     * @param htmlPath Ruta donde se guardará el archivo HTML resultante
+     * @throws TransformerException Si hay errores durante la transformación
+     * @throws IOException         Si hay errores de lectura/escritura de archivos
      */
     public static void toHTML(String xmlPath, String xslPath, String htmlPath)
             throws TransformerException, IOException {
 
-        //1)Source linking
+        // Vincular los archivos fuente (XML y XSLT)
         StreamSource xslSource = new StreamSource(new File(xslPath));
         StreamSource xmlSource = new StreamSource(new File(xmlPath));
 
-        //2)Factory and Transformer
+        // Crear el transformador que aplicará los estilos
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer(xslSource);
 
-        //3)Output stream for HTML
+        // Preparar la salida del archivo HTML
         try (FileOutputStream htmlOutput = new FileOutputStream(htmlPath)) {
             StreamResult htmlResult = new StreamResult(htmlOutput);
 
-            //4)Applies XSLT transformation
+            // Aplicar la transformación XSLT para generar el HTML
             transformer.transform(xmlSource, htmlResult);
         }
     }

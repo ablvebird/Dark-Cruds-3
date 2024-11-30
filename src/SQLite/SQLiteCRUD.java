@@ -1,32 +1,33 @@
 package SQLite;
 
 import Entities.Boss;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * This class provides CRUD operations for the Boss entity in an SQLite database.
+ * Clase que maneja las operaciones CRUD (Crear, Leer, Actualizar, Borrar)
+ * para los jefes en la base de datos SQLite.
  */
 public class SQLiteCRUD {
     private Connection connection;
 
     /**
-     * Default constructor.
+     * Constructor por defecto.
      */
     public SQLiteCRUD() {}
 
     /**
-     * Inserts a new Boss into the database.
+     * Añade un nuevo jefe a la base de datos.
      *
-     * @param boss The Boss object to be inserted.
+     * @param boss El jefe que queremos añadir
      */
     public void insertBoss(Boss boss) {
         try (PreparedStatement statement = connection.prepareStatement(
                 "INSERT INTO Boss (name, location, hp, poise, souls, drop_name, description) VALUES (?, ?, ?, ?, ?, ?, ?)"
         )) {
+            // Preparar los datos del jefe para la inserción
             statement.setString(1, boss.getBossName());
             statement.setString(2, boss.getLocation());
             statement.setInt(3, boss.getHP());
@@ -36,16 +37,16 @@ public class SQLiteCRUD {
             statement.setString(7, boss.getDescription());
 
             statement.executeUpdate();
-            System.out.println("Boss inserted into the database.");
+            System.out.println("Jefe añadido a la base de datos.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Deletes a Boss from the database based on the provided ID.
+     * Borra un jefe de la base de datos usando su ID.
      *
-     * @param bossID The ID of the Boss to be deleted.
+     * @param bossID El ID del jefe que queremos borrar
      */
     public void deleteBoss(int bossID) {
         String query = "DELETE FROM Boss WHERE id = ?";
@@ -56,9 +57,9 @@ public class SQLiteCRUD {
             int rowsDeleted = statement.executeUpdate();
 
             if (rowsDeleted > 0) {
-                System.out.println("Boss with ID " + bossID + " deleted from the database.");
+                System.out.println("Jefe con ID " + bossID + " borrado de la base de datos.");
             } else {
-                System.out.println("No boss with ID " + bossID + " found in the database.");
+                System.out.println("No se encontró ningún jefe con ID " + bossID + ".");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,11 +67,11 @@ public class SQLiteCRUD {
     }
 
     /**
-     * Updates a Boss in the database based on the provided ID and field.
+     * Actualiza la información de un jefe en la base de datos.
      *
-     * @param bossID   The ID of the Boss to be updated.
-     * @param field    The field to be updated.
-     * @param newInfo  The new information for the specified field.
+     * @param bossID   ID del jefe a actualizar
+     * @param field    Campo que queremos actualizar
+     * @param newInfo  Nueva información para ese campo
      */
     public void updateBoss(int bossID, String field, String newInfo) {
         String query = "UPDATE Boss SET " + field + " = ? WHERE id = ?";
@@ -82,9 +83,9 @@ public class SQLiteCRUD {
             int rowsUpdated = statement.executeUpdate();
 
             if (rowsUpdated > 0) {
-                System.out.println("Boss with ID " + bossID + " updated in the database.");
+                System.out.println("Jefe con ID " + bossID + " actualizado.");
             } else {
-                System.out.println("No boss with ID " + bossID + " found in the database.");
+                System.out.println("No se encontró ningún jefe con ID " + bossID + ".");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -92,9 +93,9 @@ public class SQLiteCRUD {
     }
 
     /**
-     * Counts the number of Bosses in the database.
+     * Cuenta el número total de jefes en la base de datos.
      *
-     * @return The number of Bosses in the database.
+     * @return El número de jefes en la base de datos
      */
     public int countBosses() {
         String query = "SELECT COUNT(*) FROM Boss";
@@ -105,7 +106,7 @@ public class SQLiteCRUD {
 
             if (resultSet.next()) {
                 result = resultSet.getInt(1);
-                System.out.println("Count: " + result);
+                System.out.println("Total de jefes: " + result);
                 return result;
             }
 
@@ -114,15 +115,14 @@ public class SQLiteCRUD {
         }
 
         result = 0;
-        System.out.println("Count: " + result);
+        System.out.println("Total de jefes: " + result);
         return result;
     }
 
-
     /**
-     * Retrieves a list of all Bosses from the database.
+     * Obtiene una lista con todos los jefes de la base de datos.
      *
-     * @return A List containing all Bosses in the database.
+     * @return Lista con todos los jefes
      */
     public List<Boss> getAllBosses() {
         List<Boss> bossList = new ArrayList<>();
@@ -130,6 +130,7 @@ public class SQLiteCRUD {
              ResultSet resultSet = statement.executeQuery("SELECT * FROM Boss")) {
 
             while (resultSet.next()) {
+                // Crear un nuevo jefe con los datos de cada fila
                 Boss boss = new Boss(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
@@ -149,29 +150,26 @@ public class SQLiteCRUD {
         return bossList;
     }
 
-
     /**
-     * Deletes all Bosses from the database.
+     * Borra todos los jefes de la base de datos.
      */
     public void deleteAllBosses() {
         String query = "DELETE FROM Boss";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             int rowsDeleted = statement.executeUpdate();
-
-            System.out.println(rowsDeleted + " bosses deleted from the database.");
+            System.out.println(rowsDeleted + " jefes borrados de la base de datos.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-
     /**
-     * Finds the ID of a Boss based on a specified field and match.
+     * Busca un jefe por cualquier campo y devuelve su ID.
      *
-     * @param field The field to search for.
-     * @param match The value to match in the specified field.
-     * @return The ID of the Boss if found, otherwise 0.
+     * @param field Campo por el que queremos buscar (nombre, ubicación, etc.)
+     * @param match Valor que debe tener ese campo
+     * @return ID del jefe si se encuentra, 0 si no
      */
     public int findBoss(String field, String match) {
         String query = "SELECT id FROM Boss WHERE " + field + " = ? LIMIT 1";
@@ -183,9 +181,9 @@ public class SQLiteCRUD {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     bossID = resultSet.getInt("id");
-                    System.out.println("BossID: " + bossID);
+                    System.out.println("ID del jefe: " + bossID);
                 } else {
-                    System.out.println("No boss found with " + field + " = " + match);
+                    System.out.println("No se encontró ningún jefe con " + field + " = " + match);
                 }
             }
         } catch (SQLException e) {
@@ -194,9 +192,8 @@ public class SQLiteCRUD {
         return bossID;
     }
 
-
     /**
-     * Displays the contents of the Boss table, including the row number.
+     * Muestra toda la información de los jefes en la base de datos.
      */
     public void displayBossTable() {
         String countQuery = "SELECT COUNT(*) FROM Boss";
@@ -207,7 +204,7 @@ public class SQLiteCRUD {
 
             if (countResultSet.next()) {
                 int rowCount = countResultSet.getInt(1);
-                System.out.println("Number of records in Boss table: " + rowCount);
+                System.out.println("Número de jefes en la base de datos: " + rowCount);
 
                 try (Statement selectStatement = connection.createStatement();
                      ResultSet selectResultSet = selectStatement.executeQuery(selectQuery)) {
@@ -215,15 +212,15 @@ public class SQLiteCRUD {
                     int rowNumber = 0;
                     while (selectResultSet.next()) {
                         rowNumber++;
-                        System.out.println("\nRow " + rowNumber);
-                        System.out.println("Boss ID: " + selectResultSet.getInt("id"));
-                        System.out.println("Name: " + selectResultSet.getString("name"));
-                        System.out.println("Location: " + selectResultSet.getString("location"));
-                        System.out.println("HP: " + selectResultSet.getInt("hp"));
-                        System.out.println("Poise: " + selectResultSet.getDouble("poise"));
-                        System.out.println("Souls: " + selectResultSet.getInt("souls"));
-                        System.out.println("Drop Name: " + selectResultSet.getString("drop_name"));
-                        System.out.println("Description: " + selectResultSet.getString("description"));
+                        System.out.println("\nJefe " + rowNumber);
+                        System.out.println("ID: " + selectResultSet.getInt("id"));
+                        System.out.println("Nombre: " + selectResultSet.getString("name"));
+                        System.out.println("Ubicación: " + selectResultSet.getString("location"));
+                        System.out.println("Vida: " + selectResultSet.getInt("hp"));
+                        System.out.println("Equilibrio: " + selectResultSet.getDouble("poise"));
+                        System.out.println("Almas: " + selectResultSet.getInt("souls"));
+                        System.out.println("Objeto: " + selectResultSet.getString("drop_name"));
+                        System.out.println("Descripción: " + selectResultSet.getString("description"));
                     }
                 }
             }
@@ -232,12 +229,11 @@ public class SQLiteCRUD {
         }
     }
 
-
     /**
-     * Displays metadata information about the columns in the Boss table.
+     * Muestra información detallada sobre la estructura de la tabla Boss.
      */
     public void displayColumnMetadata() {
-        String query = "SELECT * FROM Boss LIMIT 1"; // Use LIMIT 1 to fetch only one row for metadata
+        String query = "SELECT * FROM Boss LIMIT 1"; // Usamos LIMIT 1 para obtener solo una fila
 
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
@@ -245,61 +241,60 @@ public class SQLiteCRUD {
             ResultSetMetaData metaData = resultSet.getMetaData();
             int columnCount = metaData.getColumnCount();
 
-            System.out.println("Number of Columns: " + columnCount);
-            System.out.println("\nColumn Information:");
+            System.out.println("Número de columnas: " + columnCount);
+            System.out.println("\nInformación de las columnas:");
 
             for (int i = 1; i <= columnCount; i++) {
-                System.out.println("Column " + i + ":");
-                System.out.println("  Name: " + metaData.getColumnName(i));
-                System.out.println("  Type: " + metaData.getColumnTypeName(i));
-                System.out.println("  Display Size: " + metaData.getColumnDisplaySize(i));
-                System.out.println("  Precision: " + metaData.getPrecision(i));
-                System.out.println("  Scale: " + metaData.getScale(i));
-                System.out.println("  Nullable: " + (metaData.isNullable(i) == ResultSetMetaData.columnNullable ? "Yes" : "No"));
-                System.out.println("  Auto Increment: " + metaData.isAutoIncrement(i));
-                System.out.println("  Currency: " + metaData.isCurrency(i));
+                System.out.println("Columna " + i + ":");
+                System.out.println("  Nombre: " + metaData.getColumnName(i));
+                System.out.println("  Tipo: " + metaData.getColumnTypeName(i));
+                System.out.println("  Tamaño: " + metaData.getColumnDisplaySize(i));
+                System.out.println("  Precisión: " + metaData.getPrecision(i));
+                System.out.println("  Escala: " + metaData.getScale(i));
+                System.out.println("  Puede ser nulo: " + (metaData.isNullable(i) == ResultSetMetaData.columnNullable ? "Sí" : "No"));
+                System.out.println("  Auto incrementable: " + metaData.isAutoIncrement(i));
+                System.out.println("  Es moneda: " + metaData.isCurrency(i));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
-            Logger.getLogger(SQLiteCRUD.class.getName()).severe("Error displaying column metadata: " + e.getMessage());
+            Logger.getLogger(SQLiteCRUD.class.getName()).severe("Error al mostrar metadatos de columnas: " + e.getMessage());
         }
     }
 
-
     /**
-     * Displays generic information about the database using DatabaseMetaData.
+     * Muestra información general sobre la base de datos.
      */
     public void displayDatabaseInfo() {
         try {
             DatabaseMetaData metaData = connection.getMetaData();
 
-            // Database information
-            System.out.println("Database Product Name: " + metaData.getDatabaseProductName());
-            System.out.println("Database Product Version: " + metaData.getDatabaseProductVersion());
-            System.out.println("Database URL: " + metaData.getURL());
-            System.out.println("Driver Name: " + metaData.getDriverName());
-            System.out.println("Driver Version: " + metaData.getDriverVersion());
+            // Información de la base de datos
+            System.out.println("Nombre de la base de datos: " + metaData.getDatabaseProductName());
+            System.out.println("Versión de la base de datos: " + metaData.getDatabaseProductVersion());
+            System.out.println("URL de la base de datos: " + metaData.getURL());
+            System.out.println("Driver: " + metaData.getDriverName());
+            System.out.println("Versión del driver: " + metaData.getDriverVersion());
 
-            // Table information
+            // Información de las tablas
             ResultSet tables = metaData.getTables(null, null, null, null);
-            System.out.println("\nTables:");
+            System.out.println("\nTablas:");
             while (tables.next()) {
                 String tableName = tables.getString("TABLE_NAME");
                 System.out.println("  " + tableName);
             }
 
-            // Primary key information
+            // Información de las claves primarias
             ResultSet primaryKeys = metaData.getPrimaryKeys(null, null, "Boss");
-            System.out.println("\nPrimary Keys for Boss Table:");
+            System.out.println("\nClaves primarias de la tabla Boss:");
             while (primaryKeys.next()) {
                 String columnName = primaryKeys.getString("COLUMN_NAME");
                 System.out.println("  " + columnName);
             }
 
-            // Column information
+            // Información de las columnas
             ResultSet columns = metaData.getColumns(null, null, "Boss", null);
-            System.out.println("\nColumns for Boss Table:");
+            System.out.println("\nColumnas de la tabla Boss:");
             while (columns.next()) {
                 String columnName = columns.getString("COLUMN_NAME");
                 String columnType = columns.getString("TYPE_NAME");
@@ -311,19 +306,19 @@ public class SQLiteCRUD {
         }
     }
 
-
     /**
-     * Gets the current database connection.
+     * Obtiene la conexión actual con la base de datos.
      *
-     * @return The current database connection.
+     * @return La conexión actual
      */
     public Connection getConnection() {
         return connection;
     }
+
     /**
-     * Sets the database connection.
+     * Establece la conexión con la base de datos.
      *
-     * @param connection The database connection to set.
+     * @param connection La conexión a establecer
      */
     public void setConnection(Connection connection) {
         this.connection = connection;
