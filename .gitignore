@@ -35,3 +35,9 @@ bin/
 /resources/bosses_by_bossId.xml
 /bossesTransformed.html
 /newTestBosses.xml
+/resources/bosses.dat
+/resources/bossesTransformed.html
+/resources/copyOfBosses.dat
+/resources/lessBosses.dat
+/resources/newTestBosses.xml
+/resources/updatedBosses.dat
