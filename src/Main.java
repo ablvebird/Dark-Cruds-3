@@ -1,4 +1,3 @@
-// Importaciones necesarias para el proyecto
 import Entities.Boss;
 import Entities.BossManager;
 import SQLite.SQLiteCRUD;
@@ -12,6 +11,19 @@ import javax.xml.parsers.SAXParserFactory;
 import java.util.List;
 import FileManager.*;
 
+/**
+ * Dark Cruds 3 - Gestor de Datos de Jefes de Dark Souls 3
+
+ * Esta aplicación proporciona diferentes implementaciones para gestionar datos de los jefes (bosses)
+ * del juego Dark Souls 3, demostrando varios métodos de persistencia y manipulación de datos:
+
+ * - FileTest(): Manejo de archivos para guardar/cargar datos en formato .dat
+ * - DOMTest(): Procesamiento de XML usando DOM
+ * - SAXTest(): Lectura de XML usando SAX
+ * - JDOMTest(): Manipulación de XML usando JDOM
+ * - XSLTTest(): Transformación de XML a HTML usando XSLT
+ * - SQLiteTest(): Operaciones CRUD en base de datos SQLite
+ */
 public class Main {
     public static void main(String[] args) {
         // Bloques de ejercicios - Descomenta el que quieras probar
@@ -103,12 +115,12 @@ public class Main {
         // Cargar lista de jefes desde XML y mostrarla
         bossManager.setBossList(jDomManager.readXML());
         System.out.println("List size: "+bossManager.getBossList().size());
-        bossManager.showList(bossManager.getBossList());
+        BossManager.showList(bossManager.getBossList());
 
         // Crear nueva lista de jefes y mostrarla
         List<Boss> newBossList=bossManager.createBossList();
         System.out.println("List size: "+newBossList.size());
-        bossManager.showList(newBossList);
+        BossManager.showList(newBossList);
 
         // Generar nuevo archivo XML con la lista nueva
         String fileName="resources/newTestBosses";
