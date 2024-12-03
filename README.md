@@ -1,11 +1,11 @@
-# 🛠️ Dark Cruds 3 - Gestión de Datos XML en Java
+# 🛠️ Dark Cruds 3 - Ejercicios de Gestión de Datos XML en Java
 
 ![Dark Souls 3 Banner](resources/DALL·E%202024-11-29%2017.42.05.webp)
 _(thanks Dall-E :P)_
 
 ## 📜 Resumen
 
-Dark Cruds 3 es una aplicación Java que tiene como objetivo demostrar el funcionamiento de la gestión de datos con XML a través de diferentes métodos (usando como temática mi obsesión personal) a través de 6 bloques de ejercicios:
+Dark Cruds 3 es una aplicación Java originada en una serie de ejercicios para la asignatura de Acceso a Datos del ciclo Desarrollo de Aplicaciones Multiplataforma que tiene como objetivo demostrar el funcionamiento de la gestión de datos con XML a través de diferentes métodos (usando como temática mi obsesión personal) a través de 6 bloques de ejercicios:
 
 1. **🗂️ File Manager**: Este bloque se enfoca en la gestión de archivos y directorios. La clase `FileManager` proporciona métodos para crear, eliminar y copiar archivos y directorios, así como para leer y escribir datos de jefes en archivos binarios (`.dat`). Esto permite a los usuarios persistir y manejar los datos de los jefes a través del sistema de archivos.
 
