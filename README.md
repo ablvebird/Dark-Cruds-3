@@ -53,6 +53,11 @@ Para utilizar la aplicación Dark Cruds 3, sigue estos pasos:
 3. Explora los diversos paquetes y clases para comprender las diferentes funcionalidades proporcionadas por la aplicación.
 4. Ejecuta la clase `Main`, descomenta el método de testeo del bloque de ejercicios deseado para ver la aplicación en acción y revisar el log y output de la ejecución.
 
+## 👀 Roadmap
+1. Implementación de menú de consola para mejorar la interacción con el programa
+2. Refactorizar a Maven/Gradle
+3. Implementar sistema de excepciones y validación
+
 ## 🤔 Dudas y Contribuciones
 
 El origen de esta aplicación es un trabajo de clase con el que se pretende ilustrar el funcionamiento de una serie de librerías y herramientas más que para ser una aplicación funcional.
